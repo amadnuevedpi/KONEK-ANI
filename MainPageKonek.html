@@ -6,7 +6,7 @@
 <title>KONEK-ANI | Agri-Fishery e-Market</title>
 
 <!-- Font & Icons -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
@@ -29,7 +29,65 @@
 html,body{height:100%;margin:0;background:var(--bg);color:#052e16;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 
+/* --- COMMON STYLES FOR LOGIN/SIGNUP PAGES --- */
+.auth-view-bg {
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99; /* Above the main marketplace content */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+.auth-view-bg.active {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Specific background styles */
+#login-view.auth-view-bg {
+    background:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1650&q=80') center/cover no-repeat;
+}
+#signup-view.auth-view-bg {
+    background:url('https://images.unsplash.com/photo-1471193945509-9ad0617afabf?auto=format&fit=crop&w=1650&q=80') center/cover no-repeat;
+}
+
+/* Login/Signup Card Styles */
+.auth-card {
+  background:var(--glass);
+  backdrop-filter:blur(8px);
+  border-radius:20px;
+  padding:40px;
+  max-width:420px;width:100%;
+  box-shadow:0 8px 30px rgba(0,0,0,0.1);
+  color: #11492f;
+}
+.auth-card h1{margin-top:0;color:var(--green-600);text-align:center;font-weight:800;font-size:2rem;}
+.auth-card input, .auth-card select{
+  width:100%;padding:12px;border:1px solid #d1d5db;border-radius:8px;margin-top:8px;margin-bottom:12px;
+  background-color: white;
+  color: #052e16;
+}
+.auth-card button{
+  width:100%;padding:12px;border:0;border-radius:8px;
+  background:linear-gradient(90deg,var(--green-600),var(--green-500));
+  color:#fff;font-weight:700;margin-top:16px;cursor:pointer;
+}
+.auth-card a{color:var(--green-600);font-weight:700;text-decoration:none;}
+.auth-card small{display:block;text-align:center;margin-top:10px;}
+.auth-card label { display: block; font-weight: 600; font-size: 14px; color: var(--green-700); }
+
+
+/* --- MARKETPLACE STYLES (Original) --- */
+
 /* ---------- TWO-TIER HEADER (top strip) ---------- */
+#marketplace-view{display: block; opacity: 1; transition: opacity 0.3s;}
 .top-strip{
   background: linear-gradient(90deg, rgba(34,197,94,0.06), rgba(22,101,53,0.04));
   color:var(--green-700);
@@ -43,12 +101,8 @@ a{color:inherit;text-decoration:none}
 .top-strip .muted{color:var(--muted);font-size:13px}
 
 /* Notification badge beside the word "Notifications" */
-.top-strip .notif {
-  display:flex;align-items:center;gap:8px;font-weight:600;
-}
-.top-strip .notif .badge {
-  background:#ff5252;color:white;border-radius:999px;padding:3px 7px;font-size:12px;font-weight:700;
-}
+.top-strip .notif { display:flex;align-items:center;gap:8px;font-weight:600;}
+.top-strip .notif .badge { background:#ff5252;color:white;border-radius:999px;padding:3px 7px;font-size:12px;font-weight:700;}
 
 /* Main header (search-centric) */
 .main-header{
@@ -76,7 +130,7 @@ a{color:inherit;text-decoration:none}
   display:flex;align-items:center;background:white;border-radius:999px;padding:10px 14px;gap:12px;
   box-shadow:0 6px 20px rgba(3,16,12,0.08);
 }
-.search-bar input{border:0;outline:none;font-size:15px;width:100%}
+.search-bar input{border:0;outline:none;font-size:15px;width:100%;color: #052e16;}
 .search-bar .cat-select{border:0;background:transparent;font-size:14px;color:#667967;margin-right:8px}
 
 /* header actions */
@@ -157,300 +211,574 @@ a{color:inherit;text-decoration:none}
   .brand .title{font-size:18px}
   .promo-slider{height:180px}
 }
+/* CUSTOM MESSAGE BOX (ALERT/CONFIRM REPLACEMENT) */
+#custom-message-box {
+    display:none; 
+    position:fixed; 
+    top:50%; 
+    left:50%; 
+    transform:translate(-50%, -50%); 
+    background:white; 
+    padding:25px; 
+    border-radius:12px; 
+    box-shadow:0 10px 30px rgba(0,0,0,0.4); 
+    z-index:1000; 
+    max-width:90%; 
+    min-width:300px; 
+    text-align:center;
+    border: 1px solid var(--green-500);
+}
+#custom-message-box button {
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--green-600);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
 </style>
 </head>
 <body>
 
-<!-- TOP INFO STRIP -->
-<div class="top-strip" aria-hidden="true">
-  <div class="inner">
-    <div class="left">
-      <span class="muted">Welcome to KONEK-ANI</span>
-      <span style="margin-left:8px">•</span>
-      <a href="#" title="Seller center">Seller Center</a>
-      <a href="#" title="Start selling">Start Selling</a>
-      <a href="#" title="Download app">Download App</a>
-      <a href="#" title="Follow us">Follow us 🌾🐟</a>
+<!-- CUSTOM MESSAGE BOX (REPLACES ALERT/CONFIRM) -->
+<div id="custom-message-box" role="dialog" aria-modal="true" aria-labelledby="message-content">
+  <p id="message-content" style="margin-bottom:15px; color:#052e16; font-size:16px;"></p>
+  <button onclick="document.getElementById('custom-message-box').style.display='none'">OK</button>
+</div>
+
+<!-- Marketplace View -->
+<div id="marketplace-view">
+    <!-- TOP INFO STRIP -->
+    <div class="top-strip" aria-hidden="true">
+      <div class="inner">
+        <div class="left">
+          <span class="muted">Welcome to KONEK-ANI</span>
+          <span style="margin-left:8px">•</span>
+          <a href="#" title="Seller center">Seller Center</a>
+          <a href="#" title="Start selling">Start Selling</a>
+          <a href="#" title="Download app">Download App</a>
+          <a href="#" title="Follow us">Follow us 🌾🐟</a>
+        </div>
+
+        <div class="right" id="auth-unauthenticated">
+          <!-- Notification word with badge beside it -->
+          <a href="#" class="notif" title="Notifications">
+            <i class="fa-regular fa-bell" style="opacity:.9"></i>
+            <span style="font-weight:600;color:var(--green-700)">Notifications</span>
+            <span class="badge" style="background:#ff5252;color:#fff;padding:3px 7px;border-radius:999px;font-weight:700">3</span>
+          </a>
+          <a href="#" title="Help"><i class="fa-regular fa-circle-question"></i> Help</a>
+          <a href="#" onclick="showView('login')" title="Sign in">Sign In</a>
+          <a href="#" onclick="showView('signup')" title="Sign up" style="padding:6px 10px;border-radius:8px;background:linear-gradient(90deg,var(--green-600),var(--green-500));color:white">Sign Up</a>
+        </div>
+      </div>
     </div>
 
-    <div class="right">
-      <!-- Notification word with badge beside it -->
-      <a href="#" class="notif" title="Notifications">
-        <i class="fa-regular fa-bell" style="opacity:.9"></i>
-        <span style="font-weight:600;color:var(--green-700)">Notifications</span>
-        <span class="badge" style="background:#ff5252;color:#fff;padding:3px 7px;border-radius:999px;font-weight:700">3</span>
-      </a>
+    <!-- MAIN HEADER -->
+    <header class="main-header" role="banner">
+      <div class="inner">
+        <div class="brand">
+          <div class="logo">K</div>
+          <div class="title"><img src="https://cdn-icons-png.flaticon.com/512/7662/7662138.png" alt="leaf"> KONEK-ANI</div>
+        </div>
 
-      <a href="#" title="Help"><i class="fa-regular fa-circle-question"></i> Help</a>
-      <a href="login.html" title="Sign in">Sign In</a>
-      <a href="signup.html" title="Sign up" style="padding:6px 10px;border-radius:8px;background:linear-gradient(90deg,var(--green-600),var(--green-500));color:white">Sign Up</a>
+        <div class="search-bar" role="search" aria-label="Search">
+          <i class="fa-solid fa-magnifying-glass" style="color:#8fbf96;font-size:18px"></i>
+          <input placeholder="Search for agri-fishery products, sellers and updates..." aria-label="Search input">
+          <select class="cat-select" aria-label="Category">
+            <option value="">All categories</option>
+            <option>Rice & Grains</option>
+            <option>Fish & Seafood</option>
+            <option>Vegetables</option>
+          </select>
+          <button class="btn-primary" style="padding:8px 12px;border-radius:8px">Search</button>
+        </div>
+
+        <div class="header-actions" aria-hidden="false">
+          <button class="icon-btn" title="Wishlist"><i class="fa-regular fa-heart"></i></button>
+
+          <!-- cart icon with its badge near the icon -->
+          <div class="icon-with-badge" title="Cart" style="margin-right:6px">
+            <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+            <span class="count">2</span>
+          </div>
+
+          <!-- small notifications icon (top-strip already has label+badge) -->
+          <div class="icon-with-badge" title="Notifications">
+            <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+            <span class="count">3</span>
+          </div>
+
+          <!-- Authenticated User Profile (Hidden by default) -->
+          <div id="auth-authenticated" style="display:none;align-items:center;gap:8px;color:white">
+            <a href="#" title="Seller Dashboard" style="display:flex;align-items:center;gap:8px;color:white">
+                <img id="profile-pic" src="https://via.placeholder.com/36x36.png?text=U" alt="profile" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.12)">
+            </a>
+            <button id="logout-btn" class="icon-btn" title="Logout" style="color:white;margin-left:4px;"><i class="fa-solid fa-right-from-bracket"></i></button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN PAGE LAYOUT -->
+    <div class="layout" role="main">
+
+      <!-- LEFT: FILTERS, CATEGORIES & QUICK LINKS -->
+      <aside class="sidebar" aria-label="Categories & quick links">
+
+        <!-- Filters (above categories) -->
+        <div class="box">
+          <h4>Filters</h4>
+          <div class="filters">
+            <label style="font-size:13px;color:var(--muted)">Region:</label>
+            <select id="region" onchange="updateProvinces()" aria-label="Region">
+              <option value="">Select Region</option>
+              <option value="Region IX">Region IX (Zamboanga Peninsula)</option>
+              <option value="Region X">Region X (Northern Mindanao)</option>
+            </select>
+
+            <label style="font-size:13px;color:var(--muted)">Province:</label>
+            <select id="province" onchange="filterProducts()" aria-label="Province">
+              <option value="">Select Province</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="box">
+          <h4>Categories</h4>
+          <nav class="cat-list" aria-label="Product categories">
+            <div class="cat-item">🌾 Rice & Grains</div>
+            <div class="cat-item">🐟 Fish & Seafood</div>
+            <div class="cat-item">🥬 Vegetables</div>
+            <div class="cat-item">🍉 Fruits</div>
+            <div class="cat-item">🌱 Seeds</div>
+            <div class="cat-item">🚜 Farm Tools</div>
+          </nav>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="box">
+          <h4>Quick Links</h4>
+          <a href="#" style="display:block;padding:8px;border-radius:8px">📦 Sell on KONEK-ANI</a>
+          <a href="#" style="display:block;padding:8px;border-radius:8px">🧾 Order History</a>
+          <a href="#" style="display:block;padding:8px;border-radius:8px">🏷 Bulk Deals</a>
+        </div>
+      </aside>
+
+      <!-- CENTER: feed + promos + marketplace -->
+      <section class="main" aria-label="Feed and product listings">
+        <div class="feed">
+
+          <!-- PROMO SLIDER (center, above feed & marketplace picks) -->
+          <div class="promo-wrap">
+            <div class="promo-slider" aria-hidden="false">
+              <div class="promo-track" id="promoTrack">
+                <!-- 4 sample promo images -->
+                <div class="promo-slide"><img src="https://images.unsplash.com/photo-1524594154908-edd3360a0d5e?w=1600&q=80&auto=format&fit=crop" alt="Rice field"></div>
+                <div class="promo-slide"><img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=1600&q=80&auto=format&fit=crop" alt="Fresh vegetables"></div>
+                <div class="promo-slide"><img src="https://images.unsplash.com/photo-1600788913311-6c7ad781f5c1?w=1600&q=80&auto=format&fit=crop" alt="Seafood market"></div>
+                <div class="promo-slide"><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1600&q=80&auto=format&fit=crop" alt="Fruits"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SOCIAL FEED POSTS -->
+          <article class="card post" aria-labelledby="post-1">
+            <div class="post-head">
+              <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Juan">
+              <div class="post-meta">
+                <strong id="post-1">Juan Dela Cruz</strong>
+                <small class="muted">Farmer · 2 hours ago · Zamboanga</small>
+              </div>
+            </div>
+            <div class="post-content">
+              Fresh harvest alert — premium organic rice now available for bulk purchase. Minimum 500kg. DM for samples.
+              <img src="https://images.unsplash.com/photo-1607083206173-37eb2caeeb7d?w=1200&q=80&auto=format&fit=crop" alt="rice field">
+            </div>
+          </article>
+
+          <article class="card post" aria-labelledby="post-2">
+            <div class="post-head">
+              <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Maria">
+              <div class="post-meta">
+                <strong id="post-2">Maria Santos</strong>
+                <small class="muted">Retailer · 4 hours ago · Dipolog</small>
+              </div>
+            </div>
+            <div class="post-content">
+              Fresh bangus delivered today — firm texture, best for grilling. Available in 10–20kg boxes.
+              <img src="https://images.unsplash.com/photo-1616486338812-3e96d8c36f53?w=1200&q=80&auto=format&fit=crop" alt="bangus">
+            </div>
+          </article>
+
+          <!-- MARKETPLACE GRID HEADER -->
+          <div class="section-title">
+            <h3 style="margin:0;color:var(--green-600)">Marketplace Picks</h3>
+            <div class="muted">Bulk & retail from trusted sellers</div>
+          </div>
+
+          <div class="product-grid" aria-live="polite" id="market-grid">
+            <!-- Product cards (sample) -->
+            <div class="product-card" data-region="Region IX" data-province="Zamboanga del Sur" style="display:flex">
+              <div class="media"><img src="https://images.unsplash.com/photo-1607083206173-37eb2caeeb7d?w=900&q=80&auto=format&fit=crop" alt="organic rice"></div>
+              <h4>Organic White Rice (Premium)</h4>
+              <div class="meta">Zamboanga del Sur</div>
+              <div class="price">₱ 45 / kg</div>
+              <div class="chip">Low water usage</div>
+              <div class="ctl-row">
+                <button class="btn-primary" onclick="showCustomMessage('Contact seller: 0999-111-2222')">Contact Seller</button>
+                <button class="btn-outline" onclick="fav(1)"><i class="fa-regular fa-heart"></i></button>
+              </div>
+            </div>
+
+            <div class="product-card" data-region="Region IX" data-province="Zamboanga del Norte" style="display:flex">
+              <div class="media"><img src="https://images.unsplash.com/photo-1616486338812-3e96d8c36f53?w=900&q=80&auto=format&fit=crop" alt="bangus"></div>
+              <h4>Fresh Bangus (Milkfish)</h4>
+              <div class="meta">Zamboanga del Norte</div>
+              <div class="price">₱ 180 / kg</div>
+              <div class="chip">Responsible feed</div>
+              <div class="ctl-row">
+                <button class="btn-primary" onclick="showCustomMessage('Contact seller: 0999-333-4444')">Contact Seller</button>
+                <button class="btn-outline" onclick="fav(2)"><i class="fa-regular fa-heart"></i></button>
+              </div>
+            </div>
+
+            <div class="product-card" data-region="Region X" data-province="Misamis Occidental" style="display:flex">
+              <div class="media"><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=900&q=80&auto=format&fit=crop" alt="tomatoes"></div>
+              <h4>Tomatoes (Local)</h4>
+              <div class="meta">Misamis Occidental</div>
+              <div class="price">₱ 55 / kg</div>
+              <div class="chip">Organic</div>
+              <div class="ctl-row">
+                <button class="btn-primary" onclick="showCustomMessage('Contact seller: 0999-222-3333')">Contact Seller</button>
+                <button class="btn-outline" onclick="fav(3)"><i class="fa-regular fa-heart"></i></button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- RIGHT: TRENDING, WEATHER & SENSORS, PROMOS -->
+      <aside class="rightbar" aria-label="Trending and sensors">
+        <div class="box card">
+          <h4>Trending Products</h4>
+          <ul class="trend-list" aria-hidden="true">
+            <li>🐠 Tilapia — ₱150/kg</li>
+            <li>🌽 Organic Corn — ₱38/kg</li>
+            <li>🦀 Mud Crab — ₱830/kg</li>
+          </ul>
+        </div>
+
+        <div class="box card">
+          <h4>Weather & Farm Sensors</h4>
+          <div class="sensor">☀️ Temp: 31 °C</div>
+          <div class="sensor">💧 Humidity: 75%</div>
+          <div class="sensor">🌾 Soil Moisture: 61%</div>
+          <div style="margin-top:12px"><button class="btn-primary" style="width:100%" onclick="showCustomMessage('Opening farm insights (demo)')">View Insights</button></div>
+        </div>
+
+        <div class="box card">
+          <h4>Promotions</h4>
+          <p class="muted" style="margin:6px 0">Bulk buyers: get 5% off rice orders above 5,000kg. Contact sales.</p>
+          <button class="btn-outline" style="width:100%" onclick="showCustomMessage('Opening promotions (demo)')">View All</button>
+        </div>
+      </aside>
     </div>
+
+    <div class="footer">© 2025 KONEK-ANI · Agri-Fishery Digital Marketplace 🌿</div>
+
+</div>
+
+<!-- Login View (Hidden by default) -->
+<div id="login-view" class="auth-view-bg">
+  <div class="auth-card">
+    <h1>KONEK-ANI Login</h1>
+    <form id="login-form">
+      <label>Email</label>
+      <input id="login-email" type="email" required>
+      <label>Password</label>
+      <input id="login-password" type="password" required>
+      <button type="submit">Login</button>
+      <small>Don’t have an account? <a href="#" onclick="showView('signup')">Sign up</a></small>
+      <small style="margin-top:20px;"><a href="#" onclick="showView('marketplace')">Go back to Marketplace</a></small>
+    </form>
   </div>
 </div>
 
-<!-- MAIN HEADER -->
-<header class="main-header" role="banner">
-  <div class="inner">
-    <div class="brand">
-      <div class="logo">K</div>
-      <div class="title"><img src="https://cdn-icons-png.flaticon.com/512/7662/7662138.png" alt="leaf"> KONEK-ANI</div>
-    </div>
-
-    <div class="search-bar" role="search" aria-label="Search">
-      <i class="fa-solid fa-magnifying-glass" style="color:#8fbf96;font-size:18px"></i>
-      <input placeholder="Search for agri-fishery products, sellers and updates..." aria-label="Search input">
-      <select class="cat-select" aria-label="Category">
-        <option value="">All categories</option>
-        <option>Rice & Grains</option>
-        <option>Fish & Seafood</option>
-        <option>Vegetables</option>
+<!-- Sign Up View (Hidden by default) -->
+<div id="signup-view" class="auth-view-bg">
+  <div class="auth-card">
+    <h1>Create Account</h1>
+    <form id="signup-form">
+      <label>Full Name</label>
+      <input id="signup-name" type="text" required>
+      <label>Email</label>
+      <input id="signup-email" type="email" required>
+      <label>Password (min 6 characters)</label>
+      <input id="signup-password" type="password" required minlength="6">
+      <label>Account Type</label>
+      <select id="signup-account-type">
+        <option>Farmer</option>
+        <option>Retailer</option>
+        <option>Wholesaler</option>
       </select>
-      <button class="btn-primary" style="padding:8px 12px;border-radius:8px">Search</button>
-    </div>
-
-    <div class="header-actions" aria-hidden="false">
-      <button class="icon-btn" title="Wishlist"><i class="fa-regular fa-heart"></i></button>
-
-      <!-- cart icon with its badge near the icon -->
-      <div class="icon-with-badge" title="Cart" style="margin-right:6px">
-        <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
-        <span class="count">2</span>
-      </div>
-
-      <!-- small notifications icon (top-strip already has label+badge) -->
-      <div class="icon-with-badge" title="Notifications">
-        <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
-        <span class="count">3</span>
-      </div>
-
-      <a href="dashboard.html" title="Seller Dashboard" style="display:flex;align-items:center;gap:8px;color:white">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="profile" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.12)">
-      </a>
-    </div>
+      <button type="submit">Sign Up</button>
+      <small>Already have an account? <a href="#" onclick="showView('login')">Login</a></small>
+      <small style="margin-top:20px;"><a href="#" onclick="showView('marketplace')">Go back to Marketplace</a></small>
+    </form>
   </div>
-</header>
-
-<!-- MAIN PAGE LAYOUT -->
-<div class="layout" role="main">
-
-  <!-- LEFT: FILTERS, CATEGORIES & QUICK LINKS -->
-  <aside class="sidebar" aria-label="Categories & quick links">
-
-    <!-- Filters (above categories) -->
-    <div class="box">
-      <h4>Filters</h4>
-      <div class="filters">
-        <label style="font-size:13px;color:var(--muted)">Region:</label>
-        <select id="region" onchange="updateProvinces()" aria-label="Region">
-          <option value="">Select Region</option>
-          <option value="Region IX">Region IX (Zamboanga Peninsula)</option>
-          <option value="Region X">Region X (Northern Mindanao)</option>
-        </select>
-
-        <label style="font-size:13px;color:var(--muted)">Province:</label>
-        <select id="province" onchange="filterProducts()" aria-label="Province">
-          <option value="">Select Province</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- Categories -->
-    <div class="box">
-      <h4>Categories</h4>
-      <nav class="cat-list" aria-label="Product categories">
-        <div class="cat-item">🌾 Rice & Grains</div>
-        <div class="cat-item">🐟 Fish & Seafood</div>
-        <div class="cat-item">🥬 Vegetables</div>
-        <div class="cat-item">🍉 Fruits</div>
-        <div class="cat-item">🌱 Seeds</div>
-        <div class="cat-item">🚜 Farm Tools</div>
-      </nav>
-    </div>
-
-    <!-- Quick Links -->
-    <div class="box">
-      <h4>Quick Links</h4>
-      <a href="#" style="display:block;padding:8px;border-radius:8px">📦 Sell on KONEK-ANI</a>
-      <a href="#" style="display:block;padding:8px;border-radius:8px">🧾 Order History</a>
-      <a href="#" style="display:block;padding:8px;border-radius:8px">🏷 Bulk Deals</a>
-    </div>
-  </aside>
-
-  <!-- CENTER: feed + promos + marketplace -->
-  <section class="main" aria-label="Feed and product listings">
-    <div class="feed">
-
-      <!-- PROMO SLIDER (center, above feed & marketplace picks) -->
-      <div class="promo-wrap">
-        <div class="promo-slider" aria-hidden="false">
-          <div class="promo-track" id="promoTrack">
-            <!-- 4 sample promo images -->
-            <div class="promo-slide"><img src="https://images.unsplash.com/photo-1524594154908-edd3360a0d5e?w=1600&q=80&auto=format&fit=crop" alt="Rice field"></div>
-            <div class="promo-slide"><img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=1600&q=80&auto=format&fit=crop" alt="Fresh vegetables"></div>
-            <div class="promo-slide"><img src="https://images.unsplash.com/photo-1600788913311-6c7ad781f5c1?w=1600&q=80&auto=format&fit=crop" alt="Seafood market"></div>
-            <div class="promo-slide"><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1600&q=80&auto=format&fit=crop" alt="Fruits"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SOCIAL FEED POSTS -->
-      <article class="card post" aria-labelledby="post-1">
-        <div class="post-head">
-          <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Juan">
-          <div class="post-meta">
-            <strong id="post-1">Juan Dela Cruz</strong>
-            <small class="muted">Farmer · 2 hours ago · Zamboanga</small>
-          </div>
-        </div>
-        <div class="post-content">
-          Fresh harvest alert — premium organic rice now available for bulk purchase. Minimum 500kg. DM for samples.
-          <img src="https://images.unsplash.com/photo-1607083206173-37eb2caeeb7d?w=1200&q=80&auto=format&fit=crop" alt="rice field">
-        </div>
-      </article>
-
-      <article class="card post" aria-labelledby="post-2">
-        <div class="post-head">
-          <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Maria">
-          <div class="post-meta">
-            <strong id="post-2">Maria Santos</strong>
-            <small class="muted">Retailer · 4 hours ago · Dipolog</small>
-          </div>
-        </div>
-        <div class="post-content">
-          Fresh bangus delivered today — firm texture, best for grilling. Available in 10–20kg boxes.
-          <img src="https://images.unsplash.com/photo-1616486338812-3e96d8c36f53?w=1200&q=80&auto=format&fit=crop" alt="bangus">
-        </div>
-      </article>
-
-      <!-- MARKETPLACE GRID HEADER -->
-      <div class="section-title">
-        <h3 style="margin:0;color:var(--green-600)">Marketplace Picks</h3>
-        <div class="muted">Bulk & retail from trusted sellers</div>
-      </div>
-
-      <div class="product-grid" aria-live="polite" id="market-grid">
-        <!-- Product cards (sample) -->
-        <div class="product-card" data-region="Region IX" data-province="Zamboanga del Sur" style="display:flex">
-          <div class="media"><img src="https://images.unsplash.com/photo-1607083206173-37eb2caeeb7d?w=900&q=80&auto=format&fit=crop" alt="organic rice"></div>
-          <h4>Organic White Rice (Premium)</h4>
-          <div class="meta">Zamboanga del Sur</div>
-          <div class="price">₱ 45 / kg</div>
-          <div class="chip">Low water usage</div>
-          <div class="ctl-row">
-            <button class="btn-primary" onclick="alert('Contact seller: 0999-111-2222')">Contact Seller</button>
-            <button class="btn-outline" onclick="fav(1)"><i class="fa-regular fa-heart"></i></button>
-          </div>
-        </div>
-
-        <div class="product-card" data-region="Region IX" data-province="Zamboanga del Norte" style="display:flex">
-          <div class="media"><img src="https://images.unsplash.com/photo-1616486338812-3e96d8c36f53?w=900&q=80&auto=format&fit=crop" alt="bangus"></div>
-          <h4>Fresh Bangus (Milkfish)</h4>
-          <div class="meta">Zamboanga del Norte</div>
-          <div class="price">₱ 180 / kg</div>
-          <div class="chip">Responsible feed</div>
-          <div class="ctl-row">
-            <button class="btn-primary" onclick="alert('Contact seller: 0999-333-4444')">Contact Seller</button>
-            <button class="btn-outline" onclick="fav(2)"><i class="fa-regular fa-heart"></i></button>
-          </div>
-        </div>
-
-        <div class="product-card" data-region="Region X" data-province="Misamis Occidental" style="display:flex">
-          <div class="media"><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=900&q=80&auto=format&fit=crop" alt="tomatoes"></div>
-          <h4>Tomatoes (Local)</h4>
-          <div class="meta">Misamis Occidental</div>
-          <div class="price">₱ 55 / kg</div>
-          <div class="chip">Organic</div>
-          <div class="ctl-row">
-            <button class="btn-primary" onclick="alert('Contact seller: 0999-222-3333')">Contact Seller</button>
-            <button class="btn-outline" onclick="fav(3)"><i class="fa-regular fa-heart"></i></button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- RIGHT: TRENDING, WEATHER & SENSORS, PROMOS -->
-  <aside class="rightbar" aria-label="Trending and sensors">
-    <div class="box card">
-      <h4>Trending Products</h4>
-      <ul class="trend-list" aria-hidden="true">
-        <li>🐠 Tilapia — ₱150/kg</li>
-        <li>🌽 Organic Corn — ₱38/kg</li>
-        <li>🦀 Mud Crab — ₱830/kg</li>
-      </ul>
-    </div>
-
-    <div class="box card">
-      <h4>Weather & Farm Sensors</h4>
-      <div class="sensor">☀️ Temp: 31 °C</div>
-      <div class="sensor">💧 Humidity: 75%</div>
-      <div class="sensor">🌾 Soil Moisture: 61%</div>
-      <div style="margin-top:12px"><button class="btn-primary" style="width:100%" onclick="alert('Open farm insights')">View Insights</button></div>
-    </div>
-
-    <div class="box card">
-      <h4>Promotions</h4>
-      <p class="muted" style="margin:6px 0">Bulk buyers: get 5% off rice orders above 5,000kg. Contact sales.</p>
-      <button class="btn-outline" style="width:100%" onclick="alert('Open promotions')">View All</button>
-    </div>
-  </aside>
 </div>
 
-<div class="footer">© 2025 KONEK-ANI · Agri-Fishery Digital Marketplace 🌿</div>
+<script type="module">
+  // --- FIREBASE IMPORTS ---
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+  import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+  import { getFirestore, doc, setDoc, collection, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+  import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-<script>
-/* Small interactions */
-function fav(id){
-  alert('Added to favorites (demo) — product id: ' + id);
-}
+  setLogLevel('debug'); // Enable Firestore logs for debugging
 
-/* Filtering logic - region -> province population, and show/hide product cards */
-const provinces = {
-  "Region IX": ["Zamboanga del Sur", "Zamboanga del Norte", "Zamboanga Sibugay"],
-  "Region X": ["Misamis Occidental", "Misamis Oriental", "Bukidnon"]
-};
+  // --- FIREBASE CONFIGURATION (Using user's provided data) ---
+  const providedFirebaseConfig = {
+    apiKey: "AIzaSyBearOsk6SPqr8UaZj-CsgFu4EJUZtpnJc",
+    authDomain: "konek-ani-repository.firebaseapp.com",
+    projectId: "konek-ani-repository",
+    storageBucket: "konek-ani-repository.firebasestorage.app",
+    messagingSenderId: "16361707507",
+    appId: "1:16361707507:web:322d0976b6ade1e326a486",
+    measurementId: "G-3T978M3B5N"
+  };
 
-function updateProvinces() {
-  const region = document.getElementById("region").value;
-  const provinceSelect = document.getElementById("province");
-  provinceSelect.innerHTML = '<option value="">Select Province</option>';
-  if (provinces[region]) {
-    provinces[region].forEach(p => {
-      const opt = document.createElement("option");
-      opt.value = p;
-      opt.textContent = p;
-      provinceSelect.appendChild(opt);
+  // Global variables provided by the environment (preferred)
+  const appId = typeof __app_id !== 'undefined' ? __app_id : 'konek-ani-repository';
+  const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : providedFirebaseConfig;
+  const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+  
+  // --- FIREBASE INITIALIZATION ---
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  
+  let currentUserId = null;
+  
+  // Sign in with custom token or anonymously
+  async function authenticate() {
+      try {
+          if (initialAuthToken) {
+              await signInWithCustomToken(auth, initialAuthToken);
+          } else {
+              await signInAnonymously(auth);
+          }
+      } catch (error) {
+          console.error("Firebase authentication failed:", error);
+          showCustomMessage(`Authentication Error: ${error.message}`);
+      }
+  }
+
+  // --- VIEW MANAGEMENT ---
+  const marketplaceView = document.getElementById('marketplace-view');
+  const loginView = document.getElementById('login-view');
+  const signupView = document.getElementById('signup-view');
+  const unauthHeader = document.getElementById('auth-unauthenticated');
+  const authHeader = document.getElementById('auth-authenticated');
+  const profilePic = document.getElementById('profile-pic');
+  
+  function showView(viewName) {
+      // Hide all views first
+      marketplaceView.style.display = 'none';
+      loginView.classList.remove('active');
+      signupView.classList.remove('active');
+
+      if (viewName === 'marketplace') {
+          marketplaceView.style.display = 'block';
+      } else if (viewName === 'login') {
+          loginView.classList.add('active');
+      } else if (viewName === 'signup') {
+          signupView.classList.add('active');
+      }
+  }
+
+  // --- CUSTOM ALERT FUNCTION ---
+  function showCustomMessage(message) {
+      document.getElementById('message-content').textContent = message;
+      document.getElementById('custom-message-box').style.display = 'block';
+  }
+
+  // --- AUTH STATE LISTENER & UI UPDATE ---
+  onAuthStateChanged(auth, async (user) => {
+      if (user) {
+          currentUserId = user.uid;
+          unauthHeader.style.display = 'none';
+          authHeader.style.display = 'flex';
+          
+          // Fetch user data from Firestore for profile info
+          const userDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profile/data`);
+          const docSnap = await getDoc(userDocRef);
+
+          if (docSnap.exists()) {
+              const userData = docSnap.data();
+              const initial = userData.fullName ? userData.fullName.charAt(0).toUpperCase() : 'U';
+              profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${initial}`;
+              profilePic.alt = userData.fullName || 'User Profile';
+          } else {
+              // Default if profile data doesn't exist yet
+              profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${user.email.charAt(0).toUpperCase()}`;
+          }
+
+          // If the user logs in, ensure we are on the marketplace
+          if (loginView.classList.contains('active') || signupView.classList.contains('active')) {
+              showView('marketplace');
+          }
+
+      } else {
+          currentUserId = null;
+          unauthHeader.style.display = 'flex';
+          authHeader.style.display = 'none';
+          
+          // If the user logs out, go to login screen
+          if (marketplaceView.style.display !== 'none') {
+             showView('login');
+          }
+      }
+  });
+
+  // --- LOGIN FUNCTIONALITY ---
+  document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      
+      try {
+          await signInWithEmailAndPassword(auth, email, password);
+          // Redirection handled by onAuthStateChanged
+          showCustomMessage('Login successful! Welcome back.');
+      } catch (error) {
+          console.error('Login Error:', error.code, error.message);
+          let errorMessage = 'Login failed. Check your email and password.';
+          if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+              errorMessage = 'Invalid credentials. Please try again.';
+          }
+          showCustomMessage(`Login Failed: ${errorMessage}`);
+      }
+  });
+
+  // --- SIGNUP FUNCTIONALITY ---
+  document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('signup-name').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const accountType = document.getElementById('signup-account-type').value;
+
+      try {
+          // 1. Create User in Firebase Authentication
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+          
+          // 2. Save additional user data to Firestore in the private user space
+          const userDocRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_profile/data`);
+
+          await setDoc(userDocRef, {
+              fullName: name,
+              email: email,
+              accountType: accountType,
+              joinedAt: serverTimestamp()
+          });
+
+          // Redirection handled by onAuthStateChanged
+          showCustomMessage(`Welcome, ${name}! You are signed up and logged in as a ${accountType}.`);
+
+      } catch (error) {
+          console.error('Signup Error:', error.code, error.message);
+          let errorMessage = 'An unknown error occurred.';
+          if (error.code === 'auth/email-already-in-use') {
+              errorMessage = 'This email is already registered. Try logging in.';
+          } else if (error.code === 'auth/weak-password') {
+              errorMessage = 'Password should be at least 6 characters.';
+          }
+          showCustomMessage(`Sign Up Failed: ${errorMessage}`);
+      }
+  });
+
+  // --- LOGOUT FUNCTIONALITY ---
+  const logoutButton = document.getElementById('logout-btn');
+  if (logoutButton) {
+      logoutButton.addEventListener('click', async () => {
+          try {
+              await signOut(auth);
+              showCustomMessage('You have been successfully logged out.');
+              showView('login'); // Explicitly switch to login view
+          } catch (error) {
+              console.error('Logout Error:', error);
+              showCustomMessage('Logout failed. Please try again.');
+          }
+      });
+  }
+
+  // --- INITIALIZATION ---
+  document.addEventListener('DOMContentLoaded', () => {
+      // Start authentication check
+      authenticate();
+      
+      // Default view on load is Login until auth state is confirmed
+      showView('login');
+      
+      // Initialize marketplace filtering logic
+      filterProducts();
+  });
+
+  
+  /* --- MARKETPLACE FILTERING LOGIC --- */
+  function fav(id){
+      showCustomMessage('Added to favorites (demo) — product id: ' + id);
+  }
+
+  const provinces = {
+    "Region IX": ["Zamboanga del Sur", "Zamboanga del Norte", "Zamboanga Sibugay"],
+    "Region X": ["Misamis Occidental", "Misamis Oriental", "Bukidnon"]
+  };
+
+  function updateProvinces() {
+    const region = document.getElementById("region").value;
+    const provinceSelect = document.getElementById("province");
+    provinceSelect.innerHTML = '<option value="">Select Province</option>';
+    if (provinces[region]) {
+      provinces[region].forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p;
+        opt.textContent = p;
+        provinceSelect.appendChild(opt);
+      });
+    }
+    filterProducts();
+  }
+
+  function filterProducts() {
+    const region = document.getElementById("region").value;
+    const province = document.getElementById("province").value;
+    document.querySelectorAll(".product-card").forEach(card => {
+      const match = (!region || card.dataset.region === region) &&
+                    (!province || card.dataset.province === province);
+      card.style.display = match ? "flex" : "none";
     });
   }
-  filterProducts();
-}
 
-function filterProducts() {
-  const region = document.getElementById("region").value;
-  const province = document.getElementById("province").value;
-  document.querySelectorAll(".product-card").forEach(card => {
-    const match = (!region || card.dataset.region === region) &&
-                  (!province || card.dataset.province === province);
-    card.style.display = match ? "flex" : "none";
-  });
-}
 
-/* initialize (in case there are default values) */
-document.addEventListener('DOMContentLoaded', () => {
-  filterProducts();
-});
-
-/* Promo slider: (CSS handles animation). Pause on hover for better UX */
-const promoSlider = document.querySelector('.promo-slider');
-if (promoSlider) {
-  promoSlider.addEventListener('mouseenter', () => {
-    document.querySelector('.promo-track').style.animationPlayState = 'paused';
-  });
-  promoSlider.addEventListener('mouseleave', () => {
-    document.querySelector('.promo-track').style.animationPlayState = 'running';
-  });
-}
+  /* Promo slider: (CSS handles animation). Pause on hover for better UX */
+  const promoSlider = document.querySelector('.promo-slider');
+  if (promoSlider) {
+    promoSlider.addEventListener('mouseenter', () => {
+      document.querySelector('.promo-track').style.animationPlayState = 'paused';
+    });
+    promoSlider.addEventListener('mouseleave', () => {
+      document.querySelector('.promo-track').style.animationPlayState = 'running';
+    });
+  }
 </script>
 
 </body>
