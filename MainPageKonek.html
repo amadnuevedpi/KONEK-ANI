@@ -245,7 +245,8 @@ a{color:inherit;text-decoration:none}
 <!-- CUSTOM MESSAGE BOX (REPLACES ALERT/CONFIRM) -->
 <div id="custom-message-box" role="dialog" aria-modal="true" aria-labelledby="message-content">
   <p id="message-content" style="margin-bottom:15px; color:#052e16; font-size:16px;"></p>
-  <button onclick="document.getElementById('custom-message-box').style.display='none'">OK</button>
+  <!-- NOTE: The onclick is handled by the script now -->
+  <button id="message-ok-btn">OK</button> 
 </div>
 
 <!-- Marketplace View -->
@@ -270,8 +271,9 @@ a{color:inherit;text-decoration:none}
             <span class="badge" style="background:#ff5252;color:#fff;padding:3px 7px;border-radius:999px;font-weight:700">3</span>
           </a>
           <a href="#" title="Help"><i class="fa-regular fa-circle-question"></i> Help</a>
-          <a href="#" onclick="showView('login')" title="Sign in">Sign In</a>
-          <a href="#" onclick="showView('signup')" title="Sign up" style="padding:6px 10px;border-radius:8px;background:linear-gradient(90deg,var(--green-600),var(--green-500));color:white">Sign Up</a>
+          <!-- NOTE: Inline calls changed to use a data attribute for easier script handling -->
+          <a href="#" data-action="login" title="Sign in" id="show-login-link">Sign In</a> 
+          <a href="#" data-action="signup" title="Sign up" style="padding:6px 10px;border-radius:8px;background:linear-gradient(90deg,var(--green-600),var(--green-500));color:white" id="show-signup-link">Sign Up</a>
         </div>
       </div>
     </div>
@@ -333,14 +335,16 @@ a{color:inherit;text-decoration:none}
           <h4>Filters</h4>
           <div class="filters">
             <label style="font-size:13px;color:var(--muted)">Region:</label>
-            <select id="region" onchange="updateProvinces()" aria-label="Region">
+            <!-- NOTE: inline event handler moved to script -->
+            <select id="region" aria-label="Region">
               <option value="">Select Region</option>
               <option value="Region IX">Region IX (Zamboanga Peninsula)</option>
               <option value="Region X">Region X (Northern Mindanao)</option>
             </select>
 
             <label style="font-size:13px;color:var(--muted)">Province:</label>
-            <select id="province" onchange="filterProducts()" aria-label="Province">
+            <!-- NOTE: inline event handler moved to script -->
+            <select id="province" aria-label="Province">
               <option value="">Select Province</option>
             </select>
           </div>
@@ -429,8 +433,8 @@ a{color:inherit;text-decoration:none}
               <div class="price">₱ 45 / kg</div>
               <div class="chip">Low water usage</div>
               <div class="ctl-row">
-                <button class="btn-primary" onclick="showCustomMessage('Contact seller: 0999-111-2222')">Contact Seller</button>
-                <button class="btn-outline" onclick="fav(1)"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-primary" data-action="contact-seller" data-info="0999-111-2222">Contact Seller</button>
+                <button class="btn-outline" data-action="favorite" data-id="1"><i class="fa-regular fa-heart"></i></button>
               </div>
             </div>
 
@@ -441,8 +445,8 @@ a{color:inherit;text-decoration:none}
               <div class="price">₱ 180 / kg</div>
               <div class="chip">Responsible feed</div>
               <div class="ctl-row">
-                <button class="btn-primary" onclick="showCustomMessage('Contact seller: 0999-333-4444')">Contact Seller</button>
-                <button class="btn-outline" onclick="fav(2)"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-primary" data-action="contact-seller" data-info="0999-333-4444">Contact Seller</button>
+                <button class="btn-outline" data-action="favorite" data-id="2"><i class="fa-regular fa-heart"></i></button>
               </div>
             </div>
 
@@ -453,8 +457,8 @@ a{color:inherit;text-decoration:none}
               <div class="price">₱ 55 / kg</div>
               <div class="chip">Organic</div>
               <div class="ctl-row">
-                <button class="btn-primary" onclick="showCustomMessage('Contact seller: 0999-222-3333')">Contact Seller</button>
-                <button class="btn-outline" onclick="fav(3)"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-primary" data-action="contact-seller" data-info="0999-222-3333">Contact Seller</button>
+                <button class="btn-outline" data-action="favorite" data-id="3"><i class="fa-regular fa-heart"></i></button>
               </div>
             </div>
           </div>
@@ -478,13 +482,13 @@ a{color:inherit;text-decoration:none}
           <div class="sensor">☀️ Temp: 31 °C</div>
           <div class="sensor">💧 Humidity: 75%</div>
           <div class="sensor">🌾 Soil Moisture: 61%</div>
-          <div style="margin-top:12px"><button class="btn-primary" style="width:100%" onclick="showCustomMessage('Opening farm insights (demo)')">View Insights</button></div>
+          <div style="margin-top:12px"><button class="btn-primary" style="width:100%" data-action="view-insights">View Insights</button></div>
         </div>
 
         <div class="box card">
           <h4>Promotions</h4>
           <p class="muted" style="margin:6px 0">Bulk buyers: get 5% off rice orders above 5,000kg. Contact sales.</p>
-          <button class="btn-outline" style="width:100%" onclick="showCustomMessage('Opening promotions (demo)')">View All</button>
+          <button class="btn-outline" style="width:100%" data-action="view-promotions">View All</button>
         </div>
       </aside>
     </div>
@@ -503,8 +507,8 @@ a{color:inherit;text-decoration:none}
       <label>Password</label>
       <input id="login-password" type="password" required>
       <button type="submit">Login</button>
-      <small>Don’t have an account? <a href="#" onclick="showView('signup')">Sign up</a></small>
-      <small style="margin-top:20px;"><a href="#" onclick="showView('marketplace')">Go back to Marketplace</a></small>
+      <small>Don’t have an account? <a href="#" data-action="signup-from-login">Sign up</a></small>
+      <small style="margin-top:20px;"><a href="#" data-action="marketplace-from-login">Go back to Marketplace</a></small>
     </form>
   </div>
 </div>
@@ -526,9 +530,9 @@ a{color:inherit;text-decoration:none}
         <option>Retailer</option>
         <option>Wholesaler</option>
       </select>
-      <button type="submit">Sign Up</button>
-      <small>Already have an account? <a href="#" onclick="showView('login')">Login</a></small>
-      <small style="margin-top:20px;"><a href="#" onclick="showView('marketplace')">Go back to Marketplace</a></small>
+      <button type="submit" id="signup-submit-btn">Sign Up</button>
+      <small>Already have an account? <a href="#" data-action="login-from-signup">Login</a></small>
+      <small style="margin-top:20px;"><a href="#" data-action="marketplace-from-signup">Go back to Marketplace</a></small>
     </form>
   </div>
 </div>
@@ -540,6 +544,8 @@ a{color:inherit;text-decoration:none}
   import { getFirestore, doc, setDoc, collection, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
   import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+  // --- START DEBUG LOG ---
+  console.log('*** KONEK-ANI: Script starting... ***');
   setLogLevel('debug'); // Enable Firestore logs for debugging
 
   // --- FIREBASE CONFIGURATION (Using user's provided data) ---
@@ -574,7 +580,6 @@ a{color:inherit;text-decoration:none}
               await signInAnonymously(auth);
           }
       } catch (error) {
-          // NOTE: Suppressing initial auth error pop-up as it's often benign
           console.error("Firebase initial authentication failed:", error); 
       }
   }
@@ -586,8 +591,12 @@ a{color:inherit;text-decoration:none}
   const unauthHeader = document.getElementById('auth-unauthenticated');
   const authHeader = document.getElementById('auth-authenticated');
   const profilePic = document.getElementById('profile-pic');
+  const messageBox = document.getElementById('custom-message-box');
+  const messageContent = document.getElementById('message-content');
+  const messageOkBtn = document.getElementById('message-ok-btn');
   
-  function showView(viewName) {
+  // Global View Function (for inline calls to still work if needed, but primarily used internally)
+  const showView = (viewName) => {
       // Hide all views first
       marketplaceView.style.display = 'none';
       loginView.classList.remove('active');
@@ -600,13 +609,18 @@ a{color:inherit;text-decoration:none}
       } else if (viewName === 'signup') {
           signupView.classList.add('active');
       }
-  }
-
-  // --- CUSTOM ALERT FUNCTION ---
-  function showCustomMessage(message) {
-      document.getElementById('message-content').textContent = message;
-      document.getElementById('custom-message-box').style.display = 'block';
-  }
+  };
+  
+  // Global Custom Alert Function
+  const showCustomMessage = (message) => {
+      messageContent.textContent = message;
+      messageBox.style.display = 'block';
+  };
+  
+  // Handle OK button click on custom message box
+  messageOkBtn.addEventListener('click', () => {
+    messageBox.style.display = 'none';
+  });
 
   // --- AUTH STATE LISTENER & UI UPDATE ---
   onAuthStateChanged(auth, async (user) => {
@@ -619,18 +633,19 @@ a{color:inherit;text-decoration:none}
           // Path: /artifacts/{appId}/users/{userId}/user_profile/data
           const userDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profile/data`);
           
-          // Use a simple random UUID as a fallback for non-auth users if necessary, but here we expect a user.uid
           if (currentUserId) {
-            const docSnap = await getDoc(userDocRef);
-
-            if (docSnap.exists()) {
-                const userData = docSnap.data();
-                const initial = userData.fullName ? userData.fullName.charAt(0).toUpperCase() : 'U';
-                profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${initial}`;
-                profilePic.alt = userData.fullName || 'User Profile';
-            } else {
-                // Default if profile data doesn't exist yet
-                profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${user.email ? user.email.charAt(0).toUpperCase() : 'U'}`;
+            try {
+              const docSnap = await getDoc(userDocRef);
+              if (docSnap.exists()) {
+                  const userData = docSnap.data();
+                  const initial = userData.fullName ? userData.fullName.charAt(0).toUpperCase() : 'U';
+                  profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${initial}`;
+                  profilePic.alt = userData.fullName || 'User Profile';
+              } else {
+                  profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${user.email ? user.email.charAt(0).toUpperCase() : 'U'}`;
+              }
+            } catch (e) {
+              console.error("Error fetching user profile data:", e);
             }
           }
 
@@ -654,18 +669,16 @@ a{color:inherit;text-decoration:none}
 
 
   // --- MARKETPLACE FILTERING LOGIC ---
-  function fav(id){
-      showCustomMessage('Added to favorites (demo) — product id: ' + id);
-  }
-
   const provinces = {
     "Region IX": ["Zamboanga del Sur", "Zamboanga del Norte", "Zamboanga Sibugay"],
     "Region X": ["Misamis Occidental", "Misamis Oriental", "Bukidnon"]
   };
 
-  function updateProvinces() {
-    const region = document.getElementById("region").value;
+  const updateProvinces = () => {
+    const regionSelect = document.getElementById("region");
     const provinceSelect = document.getElementById("province");
+    const region = regionSelect ? regionSelect.value : '';
+
     provinceSelect.innerHTML = '<option value="">Select Province</option>';
     if (provinces[region]) {
       provinces[region].forEach(p => {
@@ -676,21 +689,28 @@ a{color:inherit;text-decoration:none}
       });
     }
     filterProducts();
-  }
+  };
 
-  function filterProducts() {
-    const region = document.getElementById("region").value;
-    const province = document.getElementById("province").value;
+  const filterProducts = () => {
+    const regionSelect = document.getElementById("region");
+    const provinceSelect = document.getElementById("province");
+    
+    if (!regionSelect || !provinceSelect) return; // safety check
+    
+    const region = regionSelect.value;
+    const province = provinceSelect.value;
+    
     document.querySelectorAll(".product-card").forEach(card => {
       const match = (!region || card.dataset.region === region) &&
                     (!province || card.dataset.province === province);
       card.style.display = match ? "flex" : "none";
     });
-  }
-
+  };
 
   // --- DOM Ready Event Listener (Attach all handlers here) ---
   document.addEventListener('DOMContentLoaded', () => {
+      console.log('*** KONEK-ANI: DOM Content Loaded. Attaching event listeners. ***');
+
       // Start authentication check
       authenticate();
       
@@ -700,7 +720,52 @@ a{color:inherit;text-decoration:none}
       // Initialize marketplace filtering logic
       filterProducts();
       
+      // Attach change listeners for filters
+      const regionSelect = document.getElementById('region');
+      const provinceSelect = document.getElementById('province');
+      if (regionSelect) regionSelect.addEventListener('change', updateProvinces);
+      if (provinceSelect) provinceSelect.addEventListener('change', filterProducts);
       
+      
+      // --- CENTRAL CLICK HANDLER FOR VIEW SWITCHING AND DEMOS ---
+      document.body.addEventListener('click', (e) => {
+          const target = e.target.closest('[data-action]');
+          if (!target) return;
+          
+          e.preventDefault(); // Prevent default link/button action
+
+          const action = target.dataset.action;
+          const info = target.dataset.info;
+          
+          switch (action) {
+              case 'login':
+              case 'login-from-signup':
+                  showView('login');
+                  break;
+              case 'signup':
+              case 'signup-from-login':
+                  showView('signup');
+                  break;
+              case 'marketplace-from-login':
+              case 'marketplace-from-signup':
+                  showView('marketplace');
+                  break;
+              case 'contact-seller':
+                  showCustomMessage(`Contact seller: ${info}`);
+                  break;
+              case 'favorite':
+                  showCustomMessage(`Added product ID ${target.dataset.id} to favorites (demo)`);
+                  break;
+              case 'view-insights':
+                  showCustomMessage('Opening farm insights (demo)');
+                  break;
+              case 'view-promotions':
+                  showCustomMessage('Opening promotions (demo)');
+                  break;
+          }
+      });
+
+
       // --- LOGIN FUNCTIONALITY ATTACHMENT ---
       const loginForm = document.getElementById('login-form');
       if (loginForm) {
@@ -709,9 +774,13 @@ a{color:inherit;text-decoration:none}
               const email = document.getElementById('login-email').value;
               const password = document.getElementById('login-password').value;
               
+              const loginButton = e.target.querySelector('button[type="submit"]');
+              const originalButtonText = loginButton.textContent;
+              loginButton.textContent = 'Logging In...';
+              loginButton.disabled = true;
+
               try {
                   await signInWithEmailAndPassword(auth, email, password);
-                  // Redirection handled by onAuthStateChanged
                   showCustomMessage('Login successful! Welcome back.');
               } catch (error) {
                   console.error('Login Error Code:', error.code, error.message);
@@ -722,24 +791,31 @@ a{color:inherit;text-decoration:none}
                       errorMessage = 'Authentication is restricted. Check Firebase settings.';
                   }
                   showCustomMessage(`Login Failed: ${errorMessage}`);
+              } finally {
+                  loginButton.textContent = originalButtonText;
+                  loginButton.disabled = false;
               }
           });
       }
 
 
-      // --- SIGNUP FUNCTIONALITY ATTACHMENT (CRITICAL FIX) ---
+      // --- SIGNUP FUNCTIONALITY ATTACHMENT (The main target for the fix) ---
       const signupForm = document.getElementById('signup-form');
       if (signupForm) {
+          console.log('*** KONEK-ANI: Signup form found. Attaching submit listener. ***');
+          
           signupForm.addEventListener('submit', async (e) => {
               e.preventDefault(); // CRITICAL: Prevents page reload
+              console.log('*** KONEK-ANI: Sign Up Form Submit Event Fired. ***');
 
               const name = document.getElementById('signup-name').value;
               const email = document.getElementById('signup-email').value;
               const password = document.getElementById('signup-password').value;
               const accountType = document.getElementById('signup-account-type').value;
-
-              if (!name || !email || !password) {
-                showCustomMessage('Please fill in all the required fields (Name, Email, Password).');
+              
+              // Validate fields
+              if (!name || !email || !password || password.length < 6) {
+                showCustomMessage('Please fill in all the required fields correctly (Password must be 6+ characters).');
                 return;
               }
 
@@ -753,9 +829,9 @@ a{color:inherit;text-decoration:none}
                   // 1. Create User in Firebase Authentication
                   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                   const user = userCredential.user;
+                  console.log(`User created in Auth: ${user.uid}`);
                   
                   // 2. Save additional user data to Firestore in the private user space
-                  // Path: /artifacts/{appId}/users/{userId}/user_profile/data
                   const userDocRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_profile/data`);
 
                   await setDoc(userDocRef, {
@@ -764,10 +840,10 @@ a{color:inherit;text-decoration:none}
                       accountType: accountType,
                       joinedAt: serverTimestamp()
                   });
+                  console.log(`User profile saved to Firestore for: ${user.uid}`);
 
                   // SUCCESS: Show message and allow onAuthStateChanged to handle view switch
                   showCustomMessage(`Welcome, ${name}! Your KONEK-ANI account is created.`);
-                  // The onAuthStateChanged listener will now automatically switch to 'marketplace'
 
               } catch (error) {
                   // --- CRITICAL DEBUGGING: Check your Console for this line! ---
@@ -779,8 +855,6 @@ a{color:inherit;text-decoration:none}
                       errorMessage = 'This email is already registered. Try logging in instead.';
                   } else if (error.code === 'auth/weak-password') {
                       errorMessage = 'Password must be at least 6 characters long.';
-                  } else if (error.code === 'auth/admin-restricted-operation') {
-                      errorMessage = 'Sign Up Failed: Email/Password provider is disabled. (Though your screenshot shows it enabled, this suggests a configuration issue.)';
                   } else if (error.code === 'auth/invalid-email') {
                       errorMessage = 'The email address is not properly formatted.';
                   }
@@ -793,6 +867,8 @@ a{color:inherit;text-decoration:none}
                   signupButton.disabled = false;
               }
           });
+      } else {
+        console.error('*** KONEK-ANI: ERROR - Signup form element (ID: signup-form) was NOT found. ***');
       }
 
       // --- LOGOUT FUNCTIONALITY ATTACHMENT ---
