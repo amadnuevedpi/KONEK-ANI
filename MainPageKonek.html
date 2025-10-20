@@ -11,17 +11,17 @@
 
 <style>
 :root{
-  --green-700: #11492f;
-  --green-600: #166534;
-  --green-500: #1f7a4c;
-  --green-400: #22c55e;
-  --muted: #6b7280;
-  --bg: #f6fbf7;
-  --card: #ffffff;
-  --glass: rgba(255,255,255,0.85);
-  --max-width: 1400px;
-  --promo-height: 260px;
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --green-700: #11492f;
+  --green-600: #166534;
+  --green-500: #1f7a4c;
+  --green-400: #22c55e;
+  --muted: #6b7280;
+  --bg: #f6fbf7;
+  --card: #ffffff;
+  --glass: rgba(255,255,255,0.85);
+  --max-width: 1400px;
+  --promo-height: 260px;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
 /* Reset & layout */
@@ -31,56 +31,54 @@ a{color:inherit;text-decoration:none}
 
 /* --- COMMON STYLES FOR LOGIN/SIGNUP PAGES --- */
 .auth-view-bg {
-    display: none; /* Hidden by default */
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99; /* Above the main marketplace content */
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease-in-out;
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99; /* Above the main marketplace content */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
 }
 .auth-view-bg.active {
-    display: flex;
-    opacity: 1;
-    pointer-events: auto;
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* Specific background styles */
 #login-view.auth-view-bg {
-    background:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1650&q=80') center/cover no-repeat;
+    background:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1650&q=80') center/cover no-repeat;
 }
 #signup-view.auth-view-bg {
-    background:url('https://images.unsplash.com/photo-1471193945509-9ad0617afabf?auto=format&fit=crop&w=1650&q=80') center/cover no-repeat;
+    background:url('https://images.unsplash.com/photo-1471193945509-9ad0617afabf?auto=format&fit=crop&w=1650&q=80') center/cover no-repeat;
 }
 
 /* Login/Signup Card Styles */
 .auth-card {
-  background:var(--glass);
-  backdrop-filter:blur(8px);
-  border-radius:20px;
-  padding:40px;
-  max-width:420px;width:100%;
-  box-shadow:0 8px 30px rgba(0,0,0,0.1);
-  color: #11492f;
+  background:var(--glass);
+  backdrop-filter:blur(8px);
+  border-radius:20px;
+  padding:40px;
+  max-width:420px;width:100%;
+  box-shadow:0 8px 30px rgba(0,0,0,0.1);
+  color: #11492f;
 }
 .auth-card h1{margin-top:0;color:var(--green-600);text-align:center;font-weight:800;font-size:2rem;}
 .auth-card input, .auth-card select{
-  width:100%;padding:12px;border:1px solid #d1d5db;border-radius:8px;margin-top:8px;margin-bottom:12px;
-  background-color: white;
-  color: #052e16;
+  width:100%;padding:12px;border:1px solid #d1d5db;border-radius:8px;margin-top:8px;margin-bottom:12px;
+  background-color: white;
+  color: #052e16;
 }
 .auth-card button{
-  width:100%;padding:12px;border:0;border-radius:8px;
-  background:linear-gradient(90deg,var(--green-600),var(--green-500));
-  color:#fff;font-weight:700;margin-top:16px;cursor:pointer;
-  transition: transform 0.1s;
+  width:100%;padding:12px;border:0;border-radius:8px;
+  background:linear-gradient(90deg,var(--green-600),var(--green-500));
+  color:#fff;font-weight:700;margin-top:16px;cursor:pointer;
 }
-.auth-card button:active { transform: scale(0.99); }
 .auth-card a{color:var(--green-600);font-weight:700;text-decoration:none;}
 .auth-card small{display:block;text-align:center;margin-top:10px;}
 .auth-card label { display: block; font-weight: 600; font-size: 14px; color: var(--green-700); }
@@ -91,11 +89,11 @@ a{color:inherit;text-decoration:none}
 /* ---------- TWO-TIER HEADER (top strip) ---------- */
 #marketplace-view{display: block; opacity: 1; transition: opacity 0.3s;}
 .top-strip{
-  background: linear-gradient(90deg, rgba(34,197,94,0.06), rgba(22,101,53,0.04));
-  color:var(--green-700);
-  font-size:13px;
-  padding:6px 16px;
-  border-bottom:1px solid rgba(17,73,47,0.04);
+  background: linear-gradient(90deg, rgba(34,197,94,0.06), rgba(22,101,53,0.04));
+  color:var(--green-700);
+  font-size:13px;
+  padding:6px 16px;
+  border-bottom:1px solid rgba(17,73,47,0.04);
 }
 .top-strip .inner{max-width:var(--max-width);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .top-strip .left, .top-strip .right{display:flex;gap:12px;align-items:center}
@@ -108,29 +106,29 @@ a{color:inherit;text-decoration:none}
 
 /* Main header (search-centric) */
 .main-header{
-  background: linear-gradient(90deg, var(--green-600), var(--green-500));
-  color:white;padding:12px 16px;
-  box-shadow:0 3px 10px rgba(2,10,6,0.06);
-  position:sticky;top:0;z-index:90;
+  background: linear-gradient(90deg, var(--green-600), var(--green-500));
+  color:white;padding:12px 16px;
+  box-shadow:0 3px 10px rgba(2,10,6,0.06);
+  position:sticky;top:0;z-index:90;
 }
 .main-header .inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;gap:16px}
 .brand{display:flex;align-items:center;gap:12px}
 .brand .logo{
-  width:56px;height:44px;border-radius:10px;background:linear-gradient(180deg,var(--green-700),var(--green-600));
-  display:flex;align-items:center;justify-content:center;font-weight:800;color:white;font-size:16px;box-shadow:0 6px 18px rgba(8,40,24,0.18)
+  width:56px;height:44px;border-radius:10px;background:linear-gradient(180deg,var(--green-700),var(--green-600));
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:white;font-size:16px;box-shadow:0 6px 18px rgba(8,40,24,0.18)
 }
 .brand .title{
-  font-weight:800;font-size:20px;letter-spacing:0.6px;
-  background: linear-gradient(90deg,#1f7a4c,#ffcc33); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  display:flex;align-items:center;gap:8px;
+  font-weight:800;font-size:20px;letter-spacing:0.6px;
+  background: linear-gradient(90deg,#1f7a4c,#ffcc33); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  display:flex;align-items:center;gap:8px;
 }
 .brand .title img{width:20px;height:20px;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.12))}
 
 /* Search bar (Facebook/Shopee style) */
 .search-bar{
-  flex:1;max-width:820px;margin:0 12px;
-  display:flex;align-items:center;background:white;border-radius:999px;padding:10px 14px;gap:12px;
-  box-shadow:0 6px 20px rgba(3,16,12,0.08);
+  flex:1;max-width:820px;margin:0 12px;
+  display:flex;align-items:center;background:white;border-radius:999px;padding:10px 14px;gap:12px;
+  box-shadow:0 6px 20px rgba(3,16,12,0.08);
 }
 .search-bar input{border:0;outline:none;font-size:15px;width:100%;color: #052e16;}
 .search-bar .cat-select{border:0;background:transparent;font-size:14px;color:#667967;margin-right:8px}
@@ -143,8 +141,8 @@ a{color:inherit;text-decoration:none}
 /* icon-with-badge patterns */
 .icon-with-badge { position:relative; display:inline-flex; align-items:center; }
 .icon-with-badge .count {
-  position:absolute; top:-6px; right:-6px;
-  background:#ff5252;color:white;border-radius:999px;padding:3px 6px;font-size:12px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.2)
+  position:absolute; top:-6px; right:-6px;
+  background:#ff5252;color:white;border-radius:999px;padding:3px 6px;font-size:12px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.2)
 }
 
 /* ---------- MAIN LAYOUT ---------- */
@@ -180,7 +178,7 @@ a{color:inherit;text-decoration:none}
 .promo-slide{flex:0 0 25%;height:100%;position:relative}
 .promo-slide img{width:100%;height:100%;object-fit:cover;display:block}
 @keyframes promoSlide{
-  0%{transform:translateX(0%)}25%{transform:translateX(-25%)}50%{transform:translateX(-50%)}75%{transform:translateX(-75%)}100%{transform:translateX(0%)}
+  0%{transform:translateX(0%)}25%{transform:translateX(-25%)}50%{transform:translateX(-50%)}75%{transform:translateX(-75%)}100%{transform:translateX(0%)}
 }
 
 /* product grid & cards */
@@ -209,36 +207,36 @@ a{color:inherit;text-decoration:none}
 
 /* responsive */
 @media (max-width:900px){
-  .layout{grid-template-columns:1fr}
-  .brand .title{font-size:18px}
-  .promo-slider{height:180px}
+  .layout{grid-template-columns:1fr}
+  .brand .title{font-size:18px}
+  .promo-slider{height:180px}
 }
 /* CUSTOM MESSAGE BOX (ALERT/CONFIRM REPLACEMENT) */
 #custom-message-box {
-    display:none; 
-    position:fixed; 
-    top:50%; 
-    left:50%; 
-    transform:translate(-50%, -50%); 
-    background:white; 
-    padding:25px; 
-    border-radius:12px; 
-    box-shadow:0 10px 30px rgba(0,0,0,0.4); 
-    z-index:1000; 
-    max-width:90%; 
-    min-width:300px; 
-    text-align:center;
-    border: 1px solid var(--green-500);
+    display:none; 
+    position:fixed; 
+    top:50%; 
+    left:50%; 
+    transform:translate(-50%, -50%); 
+    background:white; 
+    padding:25px; 
+    border-radius:12px; 
+    box-shadow:0 10px 30px rgba(0,0,0,0.4); 
+    z-index:1000; 
+    max-width:90%; 
+    min-width:300px; 
+    text-align:center;
+    border: 1px solid var(--green-500);
 }
 #custom-message-box button {
-    padding: 10px 20px;
-    border: 0;
-    border-radius: 8px;
-    background: var(--green-600);
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 10px;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--green-600);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
 }
 </style>
 </head>
@@ -246,595 +244,661 @@ a{color:inherit;text-decoration:none}
 
 <!-- CUSTOM MESSAGE BOX (REPLACES ALERT/CONFIRM) -->
 <div id="custom-message-box" role="dialog" aria-modal="true" aria-labelledby="message-content">
-  <p id="message-content" style="margin-bottom:15px; color:#052e16; font-size:16px;"></p>
-  <button id="message-ok-btn">OK</button> 
+  <p id="message-content" style="margin-bottom:15px; color:#052e16; font-size:16px;"></p>
+  <!-- NOTE: The onclick is handled by the script now -->
+  <button id="message-ok-btn">OK</button> 
 </div>
 
 <!-- Marketplace View -->
-<div id="marketplace-view" style="display:none;">
-    <!-- TOP INFO STRIP -->
-    <div class="top-strip" aria-hidden="true">
-      <div class="inner">
-        <div class="left">
-          <span class="muted">Welcome to KONEK-ANI</span>
-          <span style="margin-left:8px">•</span>
-          <a href="#" title="Seller center">Seller Center</a>
-          <a href="#" title="Start selling">Start Selling</a>
-          <a href="#" title="Download app">Download App</a>
-          <a href="#" title="Follow us">Follow us 🌾🐟</a>
-        </div>
+<div id="marketplace-view">
+    <!-- TOP INFO STRIP -->
+    <div class="top-strip" aria-hidden="true">
+      <div class="inner">
+        <div class="left">
+          <span class="muted">Welcome to KONEK-ANI</span>
+          <span style="margin-left:8px">•</span>
+          <a href="#" title="Seller center">Seller Center</a>
+          <a href="#" title="Start selling">Start Selling</a>
+          <a href="#" title="Download app">Download App</a>
+          <a href="#" title="Follow us">Follow us 🌾🐟</a>
+        </div>
 
-        <div class="right" id="auth-unauthenticated">
-          <!-- Notification word with badge beside it -->
-          <a href="#" class="notif" title="Notifications">
-            <i class="fa-regular fa-bell" style="opacity:.9"></i>
-            <span style="font-weight:600;color:var(--green-700)">Notifications</span>
-            <span class="badge" style="background:#ff5252;color:#fff;padding:3px 7px;border-radius:999px;font-weight:700">3</span>
-          </a>
-          <a href="#" title="Help"><i class="fa-regular fa-circle-question"></i> Help</a>
-          <a href="#" data-action="login" title="Sign in" id="show-login-link">Sign In</a> 
-          <a href="#" data-action="signup" title="Sign up" style="padding:6px 10px;border-radius:8px;background:linear-gradient(90deg,var(--green-600),var(--green-500));color:white" id="show-signup-link">Sign Up</a>
-        </div>
-      </div>
-    </div>
+        <div class="right" id="auth-unauthenticated">
+          <!-- Notification word with badge beside it -->
+          <a href="#" class="notif" title="Notifications">
+            <i class="fa-regular fa-bell" style="opacity:.9"></i>
+            <span style="font-weight:600;color:var(--green-700)">Notifications</span>
+            <span class="badge" style="background:#ff5252;color:#fff;padding:3px 7px;border-radius:999px;font-weight:700">3</span>
+          </a>
+          <a href="#" title="Help"><i class="fa-regular fa-circle-question"></i> Help</a>
+          <!-- NOTE: Inline calls changed to use a data attribute for easier script handling -->
+          <a href="#" data-action="login" title="Sign in" id="show-login-link">Sign In</a> 
+          <a href="#" data-action="signup" title="Sign up" style="padding:6px 10px;border-radius:8px;background:linear-gradient(90deg,var(--green-600),var(--green-500));color:white" id="show-signup-link">Sign Up</a>
+        </div>
+      </div>
+    </div>
 
-    <!-- MAIN HEADER -->
-    <header class="main-header" role="banner">
-      <div class="inner">
-        <div class="brand">
-          <div class="logo">K</div>
-          <div class="title"><img src="https://cdn-icons-png.flaticon.com/512/7662/7662138.png" alt="leaf"> KONEK-ANI</div>
-        </div>
+    <!-- MAIN HEADER -->
+    <header class="main-header" role="banner">
+      <div class="inner">
+        <div class="brand">
+          <div class="logo">K</div>
+          <div class="title"><img src="https://cdn-icons-png.flaticon.com/512/7662/7662138.png" alt="leaf"> KONEK-ANI</div>
+        </div>
 
-        <div class="search-bar" role="search" aria-label="Search">
-          <i class="fa-solid fa-magnifying-glass" style="color:#8fbf96;font-size:18px"></i>
-          <input placeholder="Search for agri-fishery products, sellers and updates..." aria-label="Search input">
-          <select class="cat-select" aria-label="Category">
-            <option value="">All categories</option>
-            <option>Rice & Grains</option>
-            <option>Fish & Seafood</option>
-            <option>Vegetables</option>
-          </select>
-          <button class="btn-primary" style="padding:8px 12px;border-radius:8px">Search</button>
-        </div>
+        <div class="search-bar" role="search" aria-label="Search">
+          <i class="fa-solid fa-magnifying-glass" style="color:#8fbf96;font-size:18px"></i>
+          <input placeholder="Search for agri-fishery products, sellers and updates..." aria-label="Search input">
+          <select class="cat-select" aria-label="Category">
+            <option value="">All categories</option>
+            <option>Rice & Grains</option>
+            <option>Fish & Seafood</option>
+            <option>Vegetables</option>
+          </select>
+          <button class="btn-primary" style="padding:8px 12px;border-radius:8px">Search</button>
+        </div>
 
-        <div class="header-actions" aria-hidden="false">
-          <button class="icon-btn" title="Wishlist"><i class="fa-regular fa-heart"></i></button>
+        <div class="header-actions" aria-hidden="false">
+          <button class="icon-btn" title="Wishlist"><i class="fa-regular fa-heart"></i></button>
 
-          <!-- cart icon with its badge near the icon -->
-          <div class="icon-with-badge" title="Cart" style="margin-right:6px">
-            <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
-            <span class="count">2</span>
-          </div>
+          <!-- cart icon with its badge near the icon -->
+          <div class="icon-with-badge" title="Cart" style="margin-right:6px">
+            <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+            <span class="count">2</span>
+          </div>
 
-          <!-- small notifications icon (top-strip already has label+badge) -->
-          <div class="icon-with-badge" title="Notifications">
-            <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
-            <span class="count">3</span>
-          </div>
+          <!-- small notifications icon (top-strip already has label+badge) -->
+          <div class="icon-with-badge" title="Notifications">
+            <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+            <span class="count">3</span>
+          </div>
 
-          <!-- Authenticated User Profile (Hidden by default) -->
-          <div id="auth-authenticated" style="display:none;align-items:center;gap:8px;color:white">
-            <a href="#" title="Seller Dashboard" style="display:flex;align-items:center;gap:8px;color:white">
-                <img id="profile-pic" src="https://placehold.co/36x36/166534/ffffff?text=U" alt="profile" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.12)">
-            </a>
-            <button id="logout-btn" class="icon-btn" title="Logout" style="color:white;margin-left:4px;"><i class="fa-solid fa-right-from-bracket"></i></button>
-          </div>
-        </div>
-      </div>
-    </header>
+          <!-- Authenticated User Profile (Hidden by default) -->
+          <div id="auth-authenticated" style="display:none;align-items:center;gap:8px;color:white">
+            <a href="#" title="Seller Dashboard" style="display:flex;align-items:center;gap:8px;color:white">
+                <img id="profile-pic" src="https://via.placeholder.com/36x36.png?text=U" alt="profile" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.12)">
+            </a>
+            <button id="logout-btn" class="icon-btn" title="Logout" style="color:white;margin-left:4px;"><i class="fa-solid fa-right-from-bracket"></i></button>
+          </div>
+        </div>
+      </div>
+    </header>
 
-    <!-- MAIN PAGE LAYOUT -->
-    <div class="layout" role="main">
+    <!-- MAIN PAGE LAYOUT -->
+    <div class="layout" role="main">
 
-      <!-- LEFT: FILTERS, CATEGORIES & QUICK LINKS -->
-      <aside class="sidebar" aria-label="Categories & quick links">
+      <!-- LEFT: FILTERS, CATEGORIES & QUICK LINKS -->
+      <aside class="sidebar" aria-label="Categories & quick links">
 
-        <!-- Filters (above categories) -->
-        <div class="box">
-          <h4>Filters</h4>
-          <div class="filters">
-            <label style="font-size:13px;color:var(--muted)">Region:</label>
-            <select id="region" aria-label="Region">
-              <option value="">Select Region</option>
-              <option value="Region IX">Region IX (Zamboanga Peninsula)</option>
-              <option value="Region X">Region X (Northern Mindanao)</option>
-            </select>
+        <!-- Filters (above categories) -->
+        <div class="box">
+          <h4>Filters</h4>
+          <div class="filters">
+            <label style="font-size:13px;color:var(--muted)">Region:</label>
+            <!-- NOTE: inline event handler moved to script -->
+            <select id="region" aria-label="Region">
+              <option value="">Select Region</option>
+              <option value="Region IX">Region IX (Zamboanga Peninsula)</option>
+              <option value="Region X">Region X (Northern Mindanao)</option>
+            </select>
 
-            <label style="font-size:13px;color:var(--muted)">Province:</label>
-            <select id="province" aria-label="Province">
-              <option value="">Select Province</option>
-            </select>
-          </div>
-        </div>
+            <label style="font-size:13px;color:var(--muted)">Province:</label>
+            <!-- NOTE: inline event handler moved to script -->
+            <select id="province" aria-label="Province">
+              <option value="">Select Province</option>
+            </select>
+          </div>
+        </div>
 
-        <!-- Categories -->
-        <div class="box">
-          <h4>Categories</h4>
-          <nav class="cat-list" aria-label="Product categories">
-            <div class="cat-item">🌾 Rice & Grains</div>
-            <div class="cat-item">🐟 Fish & Seafood</div>
-            <div class="cat-item">🥬 Vegetables</div>
-            <div class="cat-item">🍉 Fruits</div>
-            <div class="cat-item">🌱 Seeds</div>
-            <div class="cat-item">🚜 Farm Tools</div>
-          </nav>
-        </div>
+        <!-- Categories -->
+        <div class="box">
+          <h4>Categories</h4>
+          <nav class="cat-list" aria-label="Product categories">
+            <div class="cat-item">🌾 Rice & Grains</div>
+            <div class="cat-item">🐟 Fish & Seafood</div>
+            <div class="cat-item">🥬 Vegetables</div>
+            <div class="cat-item">🍉 Fruits</div>
+            <div class="cat-item">🌱 Seeds</div>
+            <div class="cat-item">🚜 Farm Tools</div>
+          </nav>
+        </div>
 
-        <!-- Quick Links -->
-        <div class="box">
-          <h4>Quick Links</h4>
-          <a href="#" style="display:block;padding:8px;border-radius:8px">📦 Sell on KONEK-ANI</a>
-          <a href="#" style="display:block;padding:8px;border-radius:8px">🧾 Order History</a>
-          <a href="#" style="display:block;padding:8px;border-radius:8px">🏷 Bulk Deals</a>
-        </div>
-      </aside>
+        <!-- Quick Links -->
+        <div class="box">
+          <h4>Quick Links</h4>
+          <a href="#" style="display:block;padding:8px;border-radius:8px">📦 Sell on KONEK-ANI</a>
+          <a href="#" style="display:block;padding:8px;border-radius:8px">🧾 Order History</a>
+          <a href="#" style="display:block;padding:8px;border-radius:8px">🏷 Bulk Deals</a>
+        </div>
+      </aside>
 
-      <!-- CENTER: FEED + MARKETPLACE -->
-      <section class="main" aria-label="Feed and product listings">
-        <div class="feed">
+      <!-- CENTER: FEED + MARKETPLACE -->
+      <section class="main" aria-label="Feed and product listings">
+        <div class="feed">
 
-          <!-- PROMO SLIDER (center, above feed & marketplace picks) -->
-          <div class="promo-wrap">
-            <div class="promo-slider" aria-hidden="true">
-              <div class="promo-track" id="promoTrack">
-                <!-- 4 sample promo images -->
-                <div class="promo-slide"><img src="https://images.unsplash.com/photo-1524594154908-edd3360a0d5e?w=1600&q=80&auto=format&fit=crop" alt="Rice field"></div>
-                <div class="promo-slide"><img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=1600&q=80&auto=format&fit=crop" alt="Fresh vegetables"></div>
-                <div class="promo-slide"><img src="https://images.unsplash.com/photo-1600788913311-6c7ad781f5c1?w=1600&q=80&auto=format&fit=crop" alt="Seafood market"></div>
-                <div class="promo-slide"><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1600&q=80&auto=format&fit=crop" alt="Fruits"></div>
-              </div>
-            </div>
-          </div>
+          <!-- PROMO SLIDER (center, above feed & marketplace picks) -->
+          <div class="promo-wrap">
+            <div class="promo-slider" aria-hidden="true">
+              <div class="promo-track" id="promoTrack">
+                <!-- 4 sample promo images -->
+                <div class="promo-slide"><img src="https://images.unsplash.com/photo-1524594154908-edd3360a0d5e?w=1600&q=80&auto=format&fit=crop" alt="Rice field"></div>
+                <div class="promo-slide"><img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=1600&q=80&auto=format&fit=crop" alt="Fresh vegetables"></div>
+                <div class="promo-slide"><img src="https://images.unsplash.com/photo-1600788913311-6c7ad781f5c1?w=1600&q=80&auto=format&fit=crop" alt="Seafood market"></div>
+                <div class="promo-slide"><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1600&q=80&auto=format&fit=crop" alt="Fruits"></div>
+              </div>
+            </div>
+          </div>
 
-          <!-- SOCIAL FEED POSTS -->
-          <article class="card post" aria-labelledby="post-1">
-            <div class="post-head">
-              <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Juan">
-              <div class="post-meta">
-                <strong id="post-1">Juan Dela Cruz</strong>
-                <small class="muted">Farmer · 2 hours ago · Zamboanga</small>
-              </div>
-            </div>
-            <div class="post-content">
-              Fresh harvest alert — premium organic rice now available for bulk purchase. Minimum 500kg. DM for samples.
-              <img src="https://images.unsplash.com/photo-1607083206173-37eb2caeeb7d?w=1200&q=80&auto=format&fit=crop" alt="rice field">
-            </div>
-          </article>
+          <!-- SOCIAL FEED POSTS -->
+          <article class="card post" aria-labelledby="post-1">
+            <div class="post-head">
+              <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Juan">
+              <div class="post-meta">
+                <strong id="post-1">Juan Dela Cruz</strong>
+                <small class="muted">Farmer · 2 hours ago · Zamboanga</small>
+              </div>
+            </div>
+            <div class="post-content">
+              Fresh harvest alert — premium organic rice now available for bulk purchase. Minimum 500kg. DM for samples.
+              <img src="https://images.unsplash.com/photo-1607083206173-37eb2caeeb7d?w=1200&q=80&auto=format&fit=crop" alt="rice field">
+            </div>
+          </article>
 
-          <article class="card post" aria-labelledby="post-2">
-            <div class="post-head">
-              <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Maria">
-              <div class="post-meta">
-                <strong id="post-2">Maria Santos</strong>
-                <small class="muted">Retailer · 4 hours ago · Dipolog</small>
-              </div>
-            </div>
-            <div class="post-content">
-              Fresh bangus delivered today — firm texture, best for grilling. Available in 10–20kg boxes.
-              <img src="https://images.unsplash.com/photo-1616486338812-3e96d8c36f53?w=1200&q=80&auto=format&fit=crop" alt="bangus">
-            </div>
-          </article>
+          <article class="card post" aria-labelledby="post-2">
+            <div class="post-head">
+              <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Maria">
+              <div class="post-meta">
+                <strong id="post-2">Maria Santos</strong>
+                <small class="muted">Retailer · 4 hours ago · Dipolog</small>
+              </div>
+            </div>
+            <div class="post-content">
+              Fresh bangus delivered today — firm texture, best for grilling. Available in 10–20kg boxes.
+              <img src="https://images.unsplash.com/photo-1616486338812-3e96d8c36f53?w=1200&q=80&auto=format&fit=crop" alt="bangus">
+            </div>
+          </article>
 
-          <!-- MARKETPLACE GRID HEADER -->
-          <div class="section-title">
-            <h3 style="margin:0;color:var(--green-600)">Marketplace Picks</h3>
-            <div class="muted">Bulk & retail from trusted sellers</div>
-          </div>
+          <!-- MARKETPLACE GRID HEADER -->
+          <div class="section-title">
+            <h3 style="margin:0;color:var(--green-600)">Marketplace Picks</h3>
+            <div class="muted">Bulk & retail from trusted sellers</div>
+          </div>
 
-          <div class="product-grid" aria-live="polite" id="market-grid">
-            <!-- Product cards (sample) -->
-            <div class="product-card" data-region="Region IX" data-province="Zamboanga del Sur" style="display:flex">
-              <div class="media"><img src="https://images.unsplash.com/photo-1607083206173-37eb2caeeb7d?w=900&q=80&auto=format&fit=crop" alt="organic rice"></div>
-              <h4>Organic White Rice (Premium)</h4>
-              <div class="meta">Zamboanga del Sur</div>
-              <div class="price">₱ 45 / kg</div>
-              <div class="chip">Low water usage</div>
-              <div class="ctl-row">
-                <button class="btn-primary" data-action="contact-seller" data-info="0999-111-2222">Contact Seller</button>
-                <button class="btn-outline" data-action="favorite" data-id="1"><i class="fa-regular fa-heart"></i></button>
-              </div>
-            </div>
+          <div class="product-grid" aria-live="polite" id="market-grid">
+            <!-- Product cards (sample) -->
+            <div class="product-card" data-region="Region IX" data-province="Zamboanga del Sur" style="display:flex">
+              <div class="media"><img src="https://images.unsplash.com/photo-1607083206173-37eb2caeeb7d?w=900&q=80&auto=format&fit=crop" alt="organic rice"></div>
+              <h4>Organic White Rice (Premium)</h4>
+              <div class="meta">Zamboanga del Sur</div>
+              <div class="price">₱ 45 / kg</div>
+              <div class="chip">Low water usage</div>
+              <div class="ctl-row">
+                <button class="btn-primary" data-action="contact-seller" data-info="0999-111-2222">Contact Seller</button>
+                <button class="btn-outline" data-action="favorite" data-id="1"><i class="fa-regular fa-heart"></i></button>
+              </div>
+            </div>
 
-            <div class="product-card" data-region="Region IX" data-province="Zamboanga del Norte" style="display:flex">
-              <div class="media"><img src="https://images.unsplash.com/photo-1616486338812-3e96d8c36f53?w=900&q=80&auto=format&fit=crop" alt="bangus"></div>
-              <h4>Fresh Bangus (Milkfish)</h4>
-              <div class="meta">Zamboanga del Norte</div>
-              <div class="price">₱ 180 / kg</div>
-              <div class="chip">Responsible feed</div>
-              <div class="ctl-row">
-                <button class="btn-primary" data-action="contact-seller" data-info="0999-333-4444">Contact Seller</button>
-                <button class="btn-outline" data-action="favorite" data-id="2"><i class="fa-regular fa-heart"></i></button>
-              </div>
-            </div>
+            <div class="product-card" data-region="Region IX" data-province="Zamboanga del Norte" style="display:flex">
+              <div class="media"><img src="https://images.unsplash.com/photo-1616486338812-3e96d8c36f53?w=900&q=80&auto=format&fit=crop" alt="bangus"></div>
+              <h4>Fresh Bangus (Milkfish)</h4>
+              <div class="meta">Zamboanga del Norte</div>
+              <div class="price">₱ 180 / kg</div>
+              <div class="chip">Responsible feed</div>
+              <div class="ctl-row">
+                <button class="btn-primary" data-action="contact-seller" data-info="0999-333-4444">Contact Seller</button>
+                <button class="btn-outline" data-action="favorite" data-id="2"><i class="fa-regular fa-heart"></i></button>
+              </div>
+            </div>
 
-            <div class="product-card" data-region="Region X" data-province="Misamis Occidental" style="display:flex">
-              <div class="media"><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=900&q=80&auto=format&fit=crop" alt="tomatoes"></div>
-              <h4>Tomatoes (Local)</h4>
-              <div class="meta">Misamis Occidental</div>
-              <div class="price">₱ 55 / kg</div>
-              <div class="chip">Organic</div>
-              <div class="ctl-row">
-                <button class="btn-primary" data-action="contact-seller" data-info="0999-222-3333">Contact Seller</button>
-                <button class="btn-outline" data-action="favorite" data-id="3"><i class="fa-regular fa-heart"></i></button>
-              </div>
-            </div>
-          </div>
+            <div class="product-card" data-region="Region X" data-province="Misamis Occidental" style="display:flex">
+              <div class="media"><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=900&q=80&auto=format&fit=crop" alt="tomatoes"></div>
+              <h4>Tomatoes (Local)</h4>
+              <div class="meta">Misamis Occidental</div>
+              <div class="price">₱ 55 / kg</div>
+              <div class="chip">Organic</div>
+              <div class="ctl-row">
+                <button class="btn-primary" data-action="contact-seller" data-info="0999-222-3333">Contact Seller</button>
+                <button class="btn-outline" data-action="favorite" data-id="3"><i class="fa-regular fa-heart"></i></button>
+              </div>
+            </div>
+          </div>
 
-        </div>
-      </section>
+        </div>
+      </section>
 
-      <!-- RIGHT: TRENDING, WEATHER & SENSORS, PROMOS -->
-      <aside class="rightbar" aria-label="Trending and sensors">
-        <div class="box card">
-          <h4>Trending Products</h4>
-          <ul class="trend-list" aria-hidden="true">
-            <li>🐠 Tilapia — ₱150/kg</li>
-            <li>🌽 Organic Corn — ₱38/kg</li>
-            <li>🦀 Mud Crab — ₱830/kg</li>
-          </ul>
-        </div>
+      <!-- RIGHT: TRENDING, WEATHER & SENSORS, PROMOS -->
+      <aside class="rightbar" aria-label="Trending and sensors">
+        <div class="box card">
+          <h4>Trending Products</h4>
+          <ul class="trend-list" aria-hidden="true">
+            <li>🐠 Tilapia — ₱150/kg</li>
+            <li>🌽 Organic Corn — ₱38/kg</li>
+            <li>🦀 Mud Crab — ₱830/kg</li>
+          </ul>
+        </div>
 
-        <div class="box card">
-          <h4>Weather & Farm Sensors</h4>
-          <div class="sensor">☀️ Temp: 31 °C</div>
-          <div class="sensor">💧 Humidity: 75%</div>
-          <div class="sensor">🌾 Soil Moisture: 61%</div>
-          <div style="margin-top:12px"><button class="btn-primary" style="width:100%" data-action="view-insights">View Insights</button></div>
-        </div>
+        <div class="box card">
+          <h4>Weather & Farm Sensors</h4>
+          <div class="sensor">☀️ Temp: 31 °C</div>
+          <div class="sensor">💧 Humidity: 75%</div>
+          <div class="sensor">🌾 Soil Moisture: 61%</div>
+          <div style="margin-top:12px"><button class="btn-primary" style="width:100%" data-action="view-insights">View Insights</button></div>
+        </div>
 
-        <div class="box card">
-          <h4>Promotions</h4>
-          <p class="muted" style="margin:6px 0">Bulk buyers: get 5% off rice orders above 5,000kg. Contact sales.</p>
-          <button class="btn-outline" style="width:100%" data-action="view-promotions">View All</button>
-        </div>
-      </aside>
-    </div>
+        <div class="box card">
+          <h4>Promotions</h4>
+          <p class="muted" style="margin:6px 0">Bulk buyers: get 5% off rice orders above 5,000kg. Contact sales.</p>
+          <button class="btn-outline" style="width:100%" data-action="view-promotions">View All</button>
+        </div>
+      </aside>
+    </div>
 
-    <div class="footer">© 2025 KONEK-ANI · Agri-Fishery Digital Marketplace 🌿</div>
+    <div class="footer">© 2025 KONEK-ANI · Agri-Fishery Digital Marketplace 🌿</div>
 
 </div>
 
 <!-- Login View (Hidden by default) -->
-<div id="login-view" class="auth-view-bg active">
-  <div class="auth-card">
-    <h1>KONEK-ANI Login</h1>
-    <form id="login-form">
-      <label>Email</label>
-      <input id="login-email" type="email" required>
-      <label>Password</label>
-      <input id="login-password" type="password" required>
-      <button type="submit">Login</button>
-      <small>Don’t have an account? <a href="#" data-action="signup-from-login">Sign up</a></small>
-      <small style="margin-top:20px;"><a href="#" data-action="marketplace-from-login">Go back to Marketplace</a></small>
-    </form>
-  </div>
+<div id="login-view" class="auth-view-bg">
+  <div class="auth-card">
+    <h1>KONEK-ANI Login</h1>
+    <form id="login-form">
+      <label>Email</label>
+      <input id="login-email" type="email" required>
+      <label>Password</label>
+      <input id="login-password" type="password" required>
+      <button type="submit">Login</button>
+      <small>Don’t have an account? <a href="#" data-action="signup-from-login">Sign up</a></small>
+      <small style="margin-top:20px;"><a href="#" data-action="marketplace-from-login">Go back to Marketplace</a></small>
+    </form>
+  </div>
 </div>
 
 <!-- Sign Up View (Hidden by default) -->
 <div id="signup-view" class="auth-view-bg">
-  <div class="auth-card">
-    <h1>Create Account</h1>
-    <form id="signup-form">
-      <label>Full Name</label>
-      <input id="signup-name" type="text" required>
-      <label>Email</label>
-      <input id="signup-email" type="email" required>
-      <label>Password (min 6 characters)</label>
-      <input id="signup-password" type="password" required minlength="6">
-      <label>Account Type</label>
-      <select id="signup-account-type">
-        <option>Farmer</option>
-        <option>Retailer</option>
-        <option>Wholesaler</option>
-      </select>
-      <button type="submit" id="signup-submit-btn">Sign Up</button>
-      <small>Already have an account? <a href="#" data-action="login-from-signup">Login</a></small>
-      <small style="margin-top:20px;"><a href="#" data-action="marketplace-from-signup">Go back to Marketplace</a></small>
-    </form>
-  </div>
+  <div class="auth-card">
+    <h1>Create Account</h1>
+    <form id="signup-form">
+      <label>Full Name</label>
+      <input id="signup-name" type="text" required>
+      <label>Email</label>
+      <input id="signup-email" type="email" required>
+      <label>Password (min 6 characters)</label>
+      <input id="signup-password" type="password" required minlength="6">
+      <label>Account Type</label>
+      <select id="signup-account-type">
+        <option>Farmer</option>
+        <option>Retailer</option>
+        <option>Wholesaler</option>
+      </select>
+      <button type="submit" id="signup-submit-btn">Sign Up</button>
+      <small>Already have an account? <a href="#" data-action="login-from-signup">Login</a></small>
+      <small style="margin-top:20px;"><a href="#" data-action="marketplace-from-signup">Go back to Marketplace</a></small>
+    </form>
+  </div>
 </div>
 
 <script type="module">
-  // --- FIREBASE IMPORTS ---
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-  import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-  import { getFirestore, doc, setDoc, collection, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-  import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+  // --- FIREBASE IMPORTS ---
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+  import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+  import { getFirestore, doc, setDoc, collection, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+  import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-  // --- START DEBUG LOG ---
-  console.log('*** KONEK-ANI: Script starting... ***');
-  setLogLevel('debug'); // Enable Firestore logs for debugging
+  // --- START DEBUG LOG ---
+  console.log('*** KONEK-ANI: Script starting... ***');
+  setLogLevel('debug'); // Enable Firestore logs for debugging
 
-  // --- FIREBASE CONFIGURATION (Using global environment variables) ---
-  const appId = typeof __app_id !== 'undefined' ? __app_id : 'konek-ani-repository';
-  const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {}; // Fallback empty object
-  const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-  
-  // --- FIREBASE INITIALIZATION ---
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-  
-  let currentUserId = null;
-  
-  // Sign in with custom token or anonymously
-  async function authenticate() {
-      try {
-          if (initialAuthToken) {
-              await signInWithCustomToken(auth, initialAuthToken);
-          } else {
-              await signInAnonymously(auth);
-          }
-      } catch (error) {
-          console.error("Firebase initial authentication failed:", error); 
-      }
-  }
+  // --- FIREBASE CONFIGURATION (Using user's provided data) ---
+  const providedFirebaseConfig = {
+    apiKey: "AIzaSyBearOsk6SPqr8UaZj-CsgFu4EJUZtpnJc",
+    authDomain: "konek-ani-repository.firebaseapp.com",
+    projectId: "konek-ani-repository",
+    storageBucket: "konek-ani-repository.firebasestorage.app",
+    messagingSenderId: "16361707507",
+    appId: "1:16361707507:web:322d0976b6ade1e326a486",
+    measurementId: "G-3T978M3B5N"
+  };
 
-  // --- VIEW MANAGEMENT & CUSTOM MESSAGE BOX ---
-  const marketplaceView = document.getElementById('marketplace-view');
-  const loginView = document.getElementById('login-view');
-  const signupView = document.getElementById('signup-view');
-  const unauthHeader = document.getElementById('auth-unauthenticated');
-  const authHeader = document.getElementById('auth-authenticated');
-  const profilePic = document.getElementById('profile-pic');
-  const messageBox = document.getElementById('custom-message-box');
-  const messageContent = document.getElementById('message-content');
-  const messageOkBtn = document.getElementById('message-ok-btn');
-  
-  // Global View Function
-  const showView = (viewName) => {
-      // Hide all views first
-      marketplaceView.style.display = 'none';
-      loginView.classList.remove('active');
-      signupView.classList.remove('active');
+  // Global variables provided by the environment (preferred)
+  const appId = typeof __app_id !== 'undefined' ? __app_id : 'konek-ani-repository';
+  const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : providedFirebaseConfig;
+  const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+  
+  // --- FIREBASE INITIALIZATION ---
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  
+  let currentUserId = null;
+  
+  // Sign in with custom token or anonymously
+  async function authenticate() {
+      try {
+          if (initialAuthToken) {
+              await signInWithCustomToken(auth, initialAuthToken);
+          } else {
+              await signInAnonymously(auth);
+          }
+      } catch (error) {
+          console.error("Firebase initial authentication failed:", error); 
+      }
+  }
 
-      if (viewName === 'marketplace') {
-          marketplaceView.style.display = 'block';
-      } else if (viewName === 'login') {
-          loginView.classList.add('active');
-      } else if (viewName === 'signup') {
-          signupView.classList.add('active');
-      }
-  };
-  
-  // Global Custom Alert Function
-  const showCustomMessage = (message) => {
-      messageContent.textContent = message;
-      messageBox.style.display = 'block';
-  };
-  
-  // Handle OK button click on custom message box
-  messageOkBtn.addEventListener('click', () => {
-    messageBox.style.display = 'none';
-  });
+  // --- VIEW MANAGEMENT ---
+  const marketplaceView = document.getElementById('marketplace-view');
+  const loginView = document.getElementById('login-view');
+  const signupView = document.getElementById('signup-view');
+  const unauthHeader = document.getElementById('auth-unauthenticated');
+  const authHeader = document.getElementById('auth-authenticated');
+  const profilePic = document.getElementById('profile-pic');
+  const messageBox = document.getElementById('custom-message-box');
+  const messageContent = document.getElementById('message-content');
+  const messageOkBtn = document.getElementById('message-ok-btn');
+  
+  // Global View Function (for inline calls to still work if needed, but primarily used internally)
+  const showView = (viewName) => {
+      // Hide all views first
+      marketplaceView.style.display = 'none';
+      loginView.classList.remove('active');
+      signupView.classList.remove('active');
 
-  // --- AUTH STATE LISTENER & UI UPDATE ---
-  onAuthStateChanged(auth, async (user) => {
-      if (user && !user.isAnonymous) {
-          // Authenticated User
-          currentUserId = user.uid;
-          unauthHeader.style.display = 'none';
-          authHeader.style.display = 'flex';
-          
-          // Fetch user data from Firestore for profile info
-          // Path: /artifacts/{appId}/users/{userId}/user_profile/data
-          const userDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profile/data`);
-          
-          try {
-            const docSnap = await getDoc(userDocRef);
-            if (docSnap.exists()) {
-                const userData = docSnap.data();
-                const initial = userData.fullName ? userData.fullName.charAt(0).toUpperCase() : 'U';
-                profilePic.src = `https://placehold.co/36x36/166534/ffffff?text=${initial}`;
-                profilePic.alt = userData.fullName || 'User Profile';
-            } else {
-                profilePic.src = `https://placehold.co/36x36/166534/ffffff?text=${user.email ? user.email.charAt(0).toUpperCase() : 'U'}`;
-            }
-          } catch (e) {
-            console.error("Error fetching user profile data:", e);
-          }
+      if (viewName === 'marketplace') {
+          marketplaceView.style.display = 'block';
+      } else if (viewName === 'login') {
+          loginView.classList.add('active');
+      } else if (viewName === 'signup') {
+          signupView.classList.add('active');
+      }
+  };
+  
+  // Global Custom Alert Function
+  const showCustomMessage = (message) => {
+      messageContent.textContent = message;
+      messageBox.style.display = 'block';
+  };
+  
+  // Handle OK button click on custom message box
+  messageOkBtn.addEventListener('click', () => {
+    messageBox.style.display = 'none';
+  });
 
-          // If the user logs in, ensure we are on the marketplace
-          if (loginView.classList.contains('active') || signupView.classList.contains('active')) {
-              showView('marketplace');
-          }
+  // --- AUTH STATE LISTENER & UI UPDATE ---
+  onAuthStateChanged(auth, async (user) => {
+      if (user) {
+          currentUserId = user.uid;
+          unauthHeader.style.display = 'none';
+          authHeader.style.display = 'flex';
+          
+          // Fetch user data from Firestore for profile info
+          // Path: /artifacts/{appId}/users/{userId}/user_profile/data
+          const userDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profile/data`);
+          
+          if (currentUserId) {
+            try {
+              const docSnap = await getDoc(userDocRef);
+              if (docSnap.exists()) {
+                  const userData = docSnap.data();
+                  const initial = userData.fullName ? userData.fullName.charAt(0).toUpperCase() : 'U';
+                  profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${initial}`;
+                  profilePic.alt = userData.fullName || 'User Profile';
+              } else {
+                  profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${user.email ? user.email.charAt(0).toUpperCase() : 'U'}`;
+              }
+            } catch (e) {
+              console.error("Error fetching user profile data:", e);
+            }
+          }
 
-      } else {
-          // Unauthenticated or Anonymous User
-          currentUserId = null;
-          unauthHeader.style.display = 'flex';
-          authHeader.style.display = 'none';
-          
-          // If the user logs out, or is anonymous, force to login view to prompt registration
-          if (user && user.isAnonymous) {
-              // Anonymous user is treated like logged out for this workflow
-              showView('login');
-          } else if (marketplaceView.style.display !== 'none') {
-              // If they were viewing marketplace and got logged out
-              showView('login');
-          }
-      }
-  });
+          // If the user logs in, ensure we are on the marketplace
+          if (loginView.classList.contains('active') || signupView.classList.contains('active')) {
+              showView('marketplace');
+          }
 
-  // --- AUTHENTICATION HANDLERS ---
-  
-  // Sign Up Handler
-  const handleSignUp = async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('signup-name').value.trim();
-      const email = document.getElementById('signup-email').value.trim();
-      const password = document.getElementById('signup-password').value;
-      const accountType = document.getElementById('signup-account-type').value;
-
-      if (password.length < 6) {
-        showCustomMessage("Password must be at least 6 characters long.");
-        return;
-      }
-      if (!name || !email || !password) {
-        showCustomMessage("Please fill in all required fields.");
-        return;
-      }
-
-      try {
-          // 1. Create user account in Firebase Auth
-          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-          const user = userCredential.user;
-          
-          // 2. Save additional user data to Firestore (the "repository")
-          const userDocRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_profile/data`);
-          await setDoc(userDocRef, {
-              fullName: name,
-              accountType: accountType,
-              email: email,
-              createdAt: serverTimestamp()
-          });
-
-          showCustomMessage(`Welcome, ${name}! Your ${accountType} account has been created successfully. You are now logged in.`);
-          // onAuthStateChanged handles the view switch
-      } catch (error) {
-          let errorMessage = "Sign Up Failed: An unknown error occurred.";
-          if (error.code === 'auth/email-already-in-use') {
-              errorMessage = "Sign Up Failed: This email is already registered. Try logging in.";
-          } else if (error.code === 'auth/weak-password') {
-              errorMessage = "Sign Up Failed: Password is too weak (min 6 characters).";
-          } else {
-              errorMessage = `Sign Up Failed: ${error.message.replace('Firebase: ', '')}`;
-          }
-          showCustomMessage(errorMessage);
-      }
-  };
-  
-  // Login Handler (Cross-examines credentials in the auth repository)
-  const handleLogin = async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('login-email').value.trim();
-      const password = document.getElementById('login-password').value;
-
-      try {
-          await signInWithEmailAndPassword(auth, email, password);
-          showCustomMessage("Login successful! Welcome back.");
-          // onAuthStateChanged handles the view switch
-      } catch (error) {
-          let errorMessage = "Login Failed: Check your email and password.";
-          if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
-              errorMessage = "Login Failed: Invalid email or password.";
-          } else {
-              errorMessage = `Login Failed: ${error.message.replace('Firebase: ', '')}`;
-          }
-          showCustomMessage(errorMessage);
-      }
-  };
-
-  // Logout Handler
-  const handleLogout = async () => {
-      try {
-          await signOut(auth);
-          showCustomMessage("You have been successfully logged out.");
-          // onAuthStateChanged handles the view switch
-      } catch (error) {
-          console.error("Logout error:", error);
-          showCustomMessage("Logout Failed. Please try again.");
-      }
-  };
-
-  // Attach Auth Handlers
-  document.getElementById('signup-form')?.addEventListener('submit', handleSignUp);
-  document.getElementById('login-form')?.addEventListener('submit', handleLogin);
-  document.getElementById('logout-btn')?.addEventListener('click', handleLogout);
+      } else {
+          currentUserId = null;
+          unauthHeader.style.display = 'flex';
+          authHeader.style.display = 'none';
+          
+          // If the user logs out, go to login screen
+          // We check if marketplace is currently visible before forcing a switch
+          if (marketplaceView.style.display !== 'none') {
+             showView('login');
+          }
+      }
+  });
 
 
-  // --- MARKETPLACE FILTERING LOGIC (Completed from previous state) ---
-  const provinces = {
-    "Region IX": ["Zamboanga del Sur", "Zamboanga del Norte", "Zamboanga Sibugay"],
-    "Region X": ["Misamis Occidental", "Misamis Oriental", "Bukidnon"]
-  };
+  // --- MARKETPLACE FILTERING LOGIC ---
+  const provinces = {
+    "Region IX": ["Zamboanga del Sur", "Zamboanga del Norte", "Zamboanga Sibugay"],
+    "Region X": ["Misamis Occidental", "Misamis Oriental", "Bukidnon"]
+  };
 
-  const updateProvinces = () => {
-    const regionSelect = document.getElementById("region");
-    const provinceSelect = document.getElementById("province");
-    const region = regionSelect ? regionSelect.value : '';
+  const updateProvinces = () => {
+    const regionSelect = document.getElementById("region");
+    const provinceSelect = document.getElementById("province");
+    const region = regionSelect ? regionSelect.value : '';
 
-    provinceSelect.innerHTML = '<option value="">Select Province</option>';
-    if (provinces[region]) {
-      provinces[region].forEach(p => {
-        const opt = document.createElement("option");
-        opt.value = p;
-        opt.textContent = p;
-        provinceSelect.appendChild(opt);
-      });
-    }
-    filterProducts();
-  };
+    provinceSelect.innerHTML = '<option value="">Select Province</option>';
+    if (provinces[region]) {
+      provinces[region].forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p;
+        opt.textContent = p;
+        provinceSelect.appendChild(opt);
+      });
+    }
+    filterProducts();
+  };
 
-  const filterProducts = () => {
-    const regionSelect = document.getElementById("region");
-    const provinceSelect = document.getElementById("province");
-    
-    if (!regionSelect || !provinceSelect) return;
-    
-    const region = regionSelect.value;
-    const province = provinceSelect.value;
-    
-    document.querySelectorAll(".product-card").forEach(card => {
-          const cardRegion = card.dataset.region;
-          const cardProvince = card.dataset.province;
-          
-          let isVisible = true;
-          
-          if (region && cardRegion !== region) {
-              isVisible = false;
-          }
-          
-          if (province && cardProvince !== province) {
-              isVisible = false;
-          }
-          
-          card.style.display = isVisible ? 'flex' : 'none';
-      });
-  };
-  
-  // Attach listeners for marketplace filters
-  document.getElementById("region")?.addEventListener('change', updateProvinces);
-  document.getElementById("province")?.addEventListener('change', filterProducts);
-  
-  
-  // --- GENERAL EVENT DELEGATION FOR VIEW SWITCHING AND BUTTONS ---
-  document.body.addEventListener('click', (e) => {
-      const target = e.target.closest('[data-action]');
-      if (!target) return;
-      
-      const action = target.dataset.action;
-      
-      // Prevent default link behavior for internal actions
-      e.preventDefault();
-      
-      if (action === 'login' || action === 'login-from-signup') {
-          showView('login');
-      } else if (action === 'signup' || action === 'signup-from-login') {
-          showView('signup');
-      } else if (action.startsWith('marketplace')) {
-          showView('marketplace');
-      } else if (action === 'contact-seller' || action === 'favorite') {
-          // Check if user is logged in (not anonymous)
-          if (auth.currentUser && !auth.currentUser.isAnonymous) {
-              if (action === 'contact-seller') {
-                  const info = target.dataset.info || 'N/A';
-                  showCustomMessage(`Seller Contact Info: ${info}. Use respectfully!`);
-              } else if (action === 'favorite') {
-                  showCustomMessage(`Product ${target.dataset.id} added to your favorites!`);
-              }
-          } else {
-              showCustomMessage("You must be logged in to perform this action. Please sign in or sign up first.");
-              showView('login');
-          }
-      }
-  });
+  const filterProducts = () => {
+    const regionSelect = document.getElementById("region");
+    const provinceSelect = document.getElementById("province");
+    
+    if (!regionSelect || !provinceSelect) return; // safety check
+    
+    const region = regionSelect.value;
+    const province = provinceSelect.value;
+    
+    document.querySelectorAll(".product-card").forEach(card => {
+      const match = (!region || card.dataset.region === region) &&
+                    (!province || card.dataset.province === province);
+      card.style.display = match ? "flex" : "none";
+    });
+  };
+
+  // --- DOM Ready Event Listener (Attach all handlers here) ---
+  document.addEventListener('DOMContentLoaded', () => {
+      console.log('*** KONEK-ANI: DOM Content Loaded. Attaching event listeners. ***');
+
+      // Start authentication check
+      authenticate();
+      
+      // Default view on load is Login until auth state is confirmed
+      showView('login');
+      
+      // Initialize marketplace filtering logic
+      filterProducts();
+      
+      // Attach change listeners for filters
+      const regionSelect = document.getElementById('region');
+      const provinceSelect = document.getElementById('province');
+      if (regionSelect) regionSelect.addEventListener('change', updateProvinces);
+      if (provinceSelect) provinceSelect.addEventListener('change', filterProducts);
+      
+      
+      // --- CENTRAL CLICK HANDLER FOR VIEW SWITCHING AND DEMOS ---
+      document.body.addEventListener('click', (e) => {
+          const target = e.target.closest('[data-action]');
+          if (!target) return;
+          
+          e.preventDefault(); // Prevent default link/button action
+
+          const action = target.dataset.action;
+          const info = target.dataset.info;
+          
+          switch (action) {
+              case 'login':
+              case 'login-from-signup':
+                  showView('login');
+                  break;
+              case 'signup':
+              case 'signup-from-login':
+                  showView('signup');
+                  break;
+              case 'marketplace-from-login':
+              case 'marketplace-from-signup':
+                  showView('marketplace');
+                  break;
+              case 'contact-seller':
+                  showCustomMessage(`Contact seller: ${info}`);
+                  break;
+              case 'favorite':
+                  showCustomMessage(`Added product ID ${target.dataset.id} to favorites (demo)`);
+                  break;
+              case 'view-insights':
+                  showCustomMessage('Opening farm insights (demo)');
+                  break;
+              case 'view-promotions':
+                  showCustomMessage('Opening promotions (demo)');
+                  break;
+          }
+      });
 
 
-  // --- INITIALIZATION ---
-  // Run initial authentication check
-  authenticate();
-  // Ensure the initial view is the login page before the auth state resolves
-  showView('login');
+      // --- LOGIN FUNCTIONALITY ATTACHMENT ---
+      const loginForm = document.getElementById('login-form');
+      if (loginForm) {
+          loginForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const email = document.getElementById('login-email').value;
+              const password = document.getElementById('login-password').value;
+              
+              const loginButton = e.target.querySelector('button[type="submit"]');
+              const originalButtonText = loginButton.textContent;
+              loginButton.textContent = 'Logging In...';
+              loginButton.disabled = true;
+
+              try {
+                  await signInWithEmailAndPassword(auth, email, password);
+                  showCustomMessage('Login successful! Welcome back.');
+              } catch (error) {
+                  console.error('Login Error Code:', error.code, error.message);
+                  let errorMessage = 'Login failed. Check your email and password.';
+                  if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                      errorMessage = 'Invalid credentials. Please try again.';
+                  } else if (error.code === 'auth/admin-restricted-operation') {
+                      errorMessage = 'Authentication is restricted. Check Firebase settings.';
+                  }
+                  showCustomMessage(`Login Failed: ${errorMessage}`);
+              } finally {
+                  loginButton.textContent = originalButtonText;
+                  loginButton.disabled = false;
+              }
+          });
+      }
+
+
+      // --- SIGNUP FUNCTIONALITY ATTACHMENT (The main target for the fix) ---
+      const signupForm = document.getElementById('signup-form');
+      if (signupForm) {
+          console.log('*** KONEK-ANI: Signup form found. Attaching submit listener. ***');
+          
+          signupForm.addEventListener('submit', async (e) => {
+              e.preventDefault(); // CRITICAL: Prevents page reload
+              console.log('*** KONEK-ANI: Sign Up Form Submit Event Fired. ***');
+
+              const name = document.getElementById('signup-name').value;
+              const email = document.getElementById('signup-email').value;
+              const password = document.getElementById('signup-password').value;
+              const accountType = document.getElementById('signup-account-type').value;
+              
+              // Validate fields
+              if (!name || !email || !password || password.length < 6) {
+                showCustomMessage('Please fill in all the required fields correctly (Password must be 6+ characters).');
+                return;
+              }
+
+              // Temporarily disable button to provide feedback and prevent double-submit
+              const signupButton = e.target.querySelector('button[type="submit"]');
+              const originalButtonText = signupButton.textContent;
+              signupButton.textContent = 'Signing Up...';
+              signupButton.disabled = true;
+
+              try {
+                  // 1. Create User in Firebase Authentication
+                  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                  const user = userCredential.user;
+                  console.log(`User created in Auth: ${user.uid}`);
+                  
+                  // 2. Save additional user data to Firestore in the private user space
+                  const userDocRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_profile/data`);
+
+                  await setDoc(userDocRef, {
+                      fullName: name,
+                      email: email,
+                      accountType: accountType,
+                      joinedAt: serverTimestamp()
+                  });
+                  console.log(`User profile saved to Firestore for: ${user.uid}`);
+
+                  // SUCCESS: Show message and allow onAuthStateChanged to handle view switch
+                  showCustomMessage(`Welcome, ${name}! Your KONEK-ANI account is created.`);
+
+              } catch (error) {
+                  // --- CRITICAL DEBUGGING: Check your Console for this line! ---
+                  console.error('Signup Error Code:', error.code, error.message);
+                  
+                  let errorMessage = 'An unknown error occurred. Please check the Console for the error code.';
+                  
+                  if (error.code === 'auth/email-already-in-use') {
+                      errorMessage = 'This email is already registered. Try logging in instead.';
+                  } else if (error.code === 'auth/weak-password') {
+                      errorMessage = 'Password must be at least 6 characters long.';
+                  } else if (error.code === 'auth/invalid-email') {
+                      errorMessage = 'The email address is not properly formatted.';
+                  }
+                  
+                  showCustomMessage(`Sign Up Failed: ${errorMessage}`);
+
+              } finally {
+                  // Reset button state regardless of success or failure
+                  signupButton.textContent = originalButtonText;
+                  signupButton.disabled = false;
+              }
+          });
+      } else {
+        console.error('*** KONEK-ANI: ERROR - Signup form element (ID: signup-form) was NOT found. ***');
+      }
+
+      // --- LOGOUT FUNCTIONALITY ATTACHMENT ---
+      const logoutButton = document.getElementById('logout-btn');
+      if (logoutButton) {
+          logoutButton.addEventListener('click', async () => {
+              try {
+                  await signOut(auth);
+                  showCustomMessage('You have been successfully logged out.');
+                  showView('login'); // Explicitly switch to login view
+              } catch (error) {
+                  console.error('Logout Error:', error);
+                  showCustomMessage('Logout failed. Please try again.');
+              }
+          });
+      }
+
+
+      /* Promo slider: (CSS handles animation). Pause on hover for better UX */
+      const promoSlider = document.querySelector('.promo-slider');
+      if (promoSlider) {
+        promoSlider.addEventListener('mouseenter', () => {
+          document.querySelector('.promo-track').style.animationPlayState = 'paused';
+        });
+        promoSlider.addEventListener('mouseleave', () => {
+          document.querySelector('.promo-track').style.animationPlayState = 'running';
+        });
+      }
+  });
 </script>
+
+</body>
+</html>
