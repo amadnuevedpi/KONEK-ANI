@@ -618,16 +618,20 @@ a{color:inherit;text-decoration:none}
           // Fetch user data from Firestore for profile info
           // Path: /artifacts/{appId}/users/{userId}/user_profile/data
           const userDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profile/data`);
-          const docSnap = await getDoc(userDocRef);
+          
+          // Use a simple random UUID as a fallback for non-auth users if necessary, but here we expect a user.uid
+          if (currentUserId) {
+            const docSnap = await getDoc(userDocRef);
 
-          if (docSnap.exists()) {
-              const userData = docSnap.data();
-              const initial = userData.fullName ? userData.fullName.charAt(0).toUpperCase() : 'U';
-              profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${initial}`;
-              profilePic.alt = userData.fullName || 'User Profile';
-          } else {
-              // Default if profile data doesn't exist yet
-              profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${user.email ? user.email.charAt(0).toUpperCase() : 'U'}`;
+            if (docSnap.exists()) {
+                const userData = docSnap.data();
+                const initial = userData.fullName ? userData.fullName.charAt(0).toUpperCase() : 'U';
+                profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${initial}`;
+                profilePic.alt = userData.fullName || 'User Profile';
+            } else {
+                // Default if profile data doesn't exist yet
+                profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${user.email ? user.email.charAt(0).toUpperCase() : 'U'}`;
+            }
           }
 
           // If the user logs in, ensure we are on the marketplace
@@ -641,130 +645,15 @@ a{color:inherit;text-decoration:none}
           authHeader.style.display = 'none';
           
           // If the user logs out, go to login screen
+          // We check if marketplace is currently visible before forcing a switch
           if (marketplaceView.style.display !== 'none') {
              showView('login');
           }
       }
   });
 
-  // --- LOGIN FUNCTIONALITY ---
-  document.getElementById('login-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
-      
-      try {
-          await signInWithEmailAndPassword(auth, email, password);
-          // Redirection handled by onAuthStateChanged
-          showCustomMessage('Login successful! Welcome back.');
-      } catch (error) {
-          console.error('Login Error Code:', error.code, error.message);
-          let errorMessage = 'Login failed. Check your email and password.';
-          if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
-              errorMessage = 'Invalid credentials. Please try again.';
-          } else if (error.code === 'auth/admin-restricted-operation') {
-              errorMessage = 'Authentication is restricted. Please check your Firebase settings (Email/Password must be enabled).';
-          }
-          showCustomMessage(`Login Failed: ${errorMessage}`);
-      }
-  });
 
-  // --- SIGNUP FUNCTIONALITY (FIXED & DEBUGGING ENABLED) ---
-  document.getElementById('signup-form').addEventListener('submit', async (e) => {
-      e.preventDefault(); // CRITICAL: Prevents page reload
-
-      const name = document.getElementById('signup-name').value;
-      const email = document.getElementById('signup-email').value;
-      const password = document.getElementById('signup-password').value;
-      const accountType = document.getElementById('signup-account-type').value;
-
-      // Simple check to ensure required fields are not empty
-      if (!name || !email || !password) {
-        showCustomMessage('Please fill in all the required fields (Name, Email, Password).');
-        return;
-      }
-
-      // Temporarily disable button to provide feedback and prevent double-submit
-      const signupButton = e.target.querySelector('button[type="submit"]');
-      const originalButtonText = signupButton.textContent;
-      signupButton.textContent = 'Signing Up...';
-      signupButton.disabled = true;
-
-      try {
-          // 1. Create User in Firebase Authentication
-          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-          const user = userCredential.user;
-          
-          // 2. Save additional user data to Firestore in the private user space
-          // Path: /artifacts/{appId}/users/{userId}/user_profile/data
-          const userDocRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_profile/data`);
-
-          await setDoc(userDocRef, {
-              fullName: name,
-              email: email,
-              accountType: accountType,
-              joinedAt: serverTimestamp()
-          });
-
-          // SUCCESS: Show message and allow onAuthStateChanged to handle view switch
-          showCustomMessage(`Welcome, ${name}! Your KONEK-ANI account is created.`);
-          showView('marketplace');
-
-      } catch (error) {
-          // --- CRITICAL DEBUGGING: Check your Console for this line! ---
-          console.error('Signup Error Code:', error.code, error.message);
-          
-          let errorMessage = 'An unknown error occurred. Please check the Console for the error code.';
-          
-          if (error.code === 'auth/email-already-in-use') {
-              errorMessage = 'This email is already registered. Try logging in instead.';
-          } else if (error.code === 'auth/weak-password') {
-              errorMessage = 'Password must be at least 6 characters long.';
-          } else if (error.code === 'auth/admin-restricted-operation') {
-              // --- MOST LIKELY FIX ---
-              errorMessage = 'Sign Up Failed: The Email/Password provider is disabled. Please ensure you ENABLE it in your Firebase Console under **Authentication** > **Sign-in method** for project **konek-ani-repository**.';
-          } else if (error.code === 'auth/invalid-email') {
-              errorMessage = 'The email address is not properly formatted.';
-          }
-          
-          showCustomMessage(`Sign Up Failed: ${errorMessage}`);
-
-      } finally {
-          // Reset button state regardless of success or failure
-          signupButton.textContent = originalButtonText;
-          signupButton.disabled = false;
-      }
-  });
-
-  // --- LOGOUT FUNCTIONALITY ---
-  const logoutButton = document.getElementById('logout-btn');
-  if (logoutButton) {
-      logoutButton.addEventListener('click', async () => {
-          try {
-              await signOut(auth);
-              showCustomMessage('You have been successfully logged out.');
-              showView('login'); // Explicitly switch to login view
-          } catch (error) {
-              console.error('Logout Error:', error);
-              showCustomMessage('Logout failed. Please try again.');
-          }
-      });
-  }
-
-  // --- INITIALIZATION ---
-  document.addEventListener('DOMContentLoaded', () => {
-      // Start authentication check
-      authenticate();
-      
-      // Default view on load is Login until auth state is confirmed
-      showView('login');
-      
-      // Initialize marketplace filtering logic
-      filterProducts();
-  });
-
-  
-  /* --- MARKETPLACE FILTERING LOGIC --- */
+  // --- MARKETPLACE FILTERING LOGIC ---
   function fav(id){
       showCustomMessage('Added to favorites (demo) — product id: ' + id);
   }
@@ -800,16 +689,139 @@ a{color:inherit;text-decoration:none}
   }
 
 
-  /* Promo slider: (CSS handles animation). Pause on hover for better UX */
-  const promoSlider = document.querySelector('.promo-slider');
-  if (promoSlider) {
-    promoSlider.addEventListener('mouseenter', () => {
-      document.querySelector('.promo-track').style.animationPlayState = 'paused';
-    });
-    promoSlider.addEventListener('mouseleave', () => {
-      document.querySelector('.promo-track').style.animationPlayState = 'running';
-    });
-  }
+  // --- DOM Ready Event Listener (Attach all handlers here) ---
+  document.addEventListener('DOMContentLoaded', () => {
+      // Start authentication check
+      authenticate();
+      
+      // Default view on load is Login until auth state is confirmed
+      showView('login');
+      
+      // Initialize marketplace filtering logic
+      filterProducts();
+      
+      
+      // --- LOGIN FUNCTIONALITY ATTACHMENT ---
+      const loginForm = document.getElementById('login-form');
+      if (loginForm) {
+          loginForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const email = document.getElementById('login-email').value;
+              const password = document.getElementById('login-password').value;
+              
+              try {
+                  await signInWithEmailAndPassword(auth, email, password);
+                  // Redirection handled by onAuthStateChanged
+                  showCustomMessage('Login successful! Welcome back.');
+              } catch (error) {
+                  console.error('Login Error Code:', error.code, error.message);
+                  let errorMessage = 'Login failed. Check your email and password.';
+                  if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                      errorMessage = 'Invalid credentials. Please try again.';
+                  } else if (error.code === 'auth/admin-restricted-operation') {
+                      errorMessage = 'Authentication is restricted. Check Firebase settings.';
+                  }
+                  showCustomMessage(`Login Failed: ${errorMessage}`);
+              }
+          });
+      }
+
+
+      // --- SIGNUP FUNCTIONALITY ATTACHMENT (CRITICAL FIX) ---
+      const signupForm = document.getElementById('signup-form');
+      if (signupForm) {
+          signupForm.addEventListener('submit', async (e) => {
+              e.preventDefault(); // CRITICAL: Prevents page reload
+
+              const name = document.getElementById('signup-name').value;
+              const email = document.getElementById('signup-email').value;
+              const password = document.getElementById('signup-password').value;
+              const accountType = document.getElementById('signup-account-type').value;
+
+              if (!name || !email || !password) {
+                showCustomMessage('Please fill in all the required fields (Name, Email, Password).');
+                return;
+              }
+
+              // Temporarily disable button to provide feedback and prevent double-submit
+              const signupButton = e.target.querySelector('button[type="submit"]');
+              const originalButtonText = signupButton.textContent;
+              signupButton.textContent = 'Signing Up...';
+              signupButton.disabled = true;
+
+              try {
+                  // 1. Create User in Firebase Authentication
+                  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                  const user = userCredential.user;
+                  
+                  // 2. Save additional user data to Firestore in the private user space
+                  // Path: /artifacts/{appId}/users/{userId}/user_profile/data
+                  const userDocRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_profile/data`);
+
+                  await setDoc(userDocRef, {
+                      fullName: name,
+                      email: email,
+                      accountType: accountType,
+                      joinedAt: serverTimestamp()
+                  });
+
+                  // SUCCESS: Show message and allow onAuthStateChanged to handle view switch
+                  showCustomMessage(`Welcome, ${name}! Your KONEK-ANI account is created.`);
+                  // The onAuthStateChanged listener will now automatically switch to 'marketplace'
+
+              } catch (error) {
+                  // --- CRITICAL DEBUGGING: Check your Console for this line! ---
+                  console.error('Signup Error Code:', error.code, error.message);
+                  
+                  let errorMessage = 'An unknown error occurred. Please check the Console for the error code.';
+                  
+                  if (error.code === 'auth/email-already-in-use') {
+                      errorMessage = 'This email is already registered. Try logging in instead.';
+                  } else if (error.code === 'auth/weak-password') {
+                      errorMessage = 'Password must be at least 6 characters long.';
+                  } else if (error.code === 'auth/admin-restricted-operation') {
+                      errorMessage = 'Sign Up Failed: Email/Password provider is disabled. (Though your screenshot shows it enabled, this suggests a configuration issue.)';
+                  } else if (error.code === 'auth/invalid-email') {
+                      errorMessage = 'The email address is not properly formatted.';
+                  }
+                  
+                  showCustomMessage(`Sign Up Failed: ${errorMessage}`);
+
+              } finally {
+                  // Reset button state regardless of success or failure
+                  signupButton.textContent = originalButtonText;
+                  signupButton.disabled = false;
+              }
+          });
+      }
+
+      // --- LOGOUT FUNCTIONALITY ATTACHMENT ---
+      const logoutButton = document.getElementById('logout-btn');
+      if (logoutButton) {
+          logoutButton.addEventListener('click', async () => {
+              try {
+                  await signOut(auth);
+                  showCustomMessage('You have been successfully logged out.');
+                  showView('login'); // Explicitly switch to login view
+              } catch (error) {
+                  console.error('Logout Error:', error);
+                  showCustomMessage('Logout failed. Please try again.');
+              }
+          });
+      }
+
+
+      /* Promo slider: (CSS handles animation). Pause on hover for better UX */
+      const promoSlider = document.querySelector('.promo-slider');
+      if (promoSlider) {
+        promoSlider.addEventListener('mouseenter', () => {
+          document.querySelector('.promo-track').style.animationPlayState = 'paused';
+        });
+        promoSlider.addEventListener('mouseleave', () => {
+          document.querySelector('.promo-track').style.animationPlayState = 'running';
+        });
+      }
+  });
 </script>
 
 </body>
