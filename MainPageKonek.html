@@ -574,8 +574,9 @@ a{color:inherit;text-decoration:none}
               await signInAnonymously(auth);
           }
       } catch (error) {
-          console.error("Firebase authentication failed:", error);
-          showCustomMessage(`Authentication Error: ${error.message}`);
+          // NOTE: Suppressing initial auth error pop-up as it's often benign
+          // in this environment, but still logging for debug.
+          console.error("Firebase initial authentication failed:", error); 
       }
   }
 
@@ -616,6 +617,7 @@ a{color:inherit;text-decoration:none}
           authHeader.style.display = 'flex';
           
           // Fetch user data from Firestore for profile info
+          // Path: /artifacts/{appId}/users/{userId}/user_profile/data
           const userDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profile/data`);
           const docSnap = await getDoc(userDocRef);
 
@@ -626,7 +628,7 @@ a{color:inherit;text-decoration:none}
               profilePic.alt = userData.fullName || 'User Profile';
           } else {
               // Default if profile data doesn't exist yet
-              profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${user.email.charAt(0).toUpperCase()}`;
+              profilePic.src = user.photoURL || `https://placehold.co/36x36/166534/ffffff?text=${user.email ? user.email.charAt(0).toUpperCase() : 'U'}`;
           }
 
           // If the user logs in, ensure we are on the marketplace
@@ -661,12 +663,14 @@ a{color:inherit;text-decoration:none}
           let errorMessage = 'Login failed. Check your email and password.';
           if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
               errorMessage = 'Invalid credentials. Please try again.';
+          } else if (error.code === 'auth/admin-restricted-operation') {
+              errorMessage = 'Authentication is restricted. Please check your Firebase settings (Email/Password must be enabled).';
           }
           showCustomMessage(`Login Failed: ${errorMessage}`);
       }
   });
 
-  // --- SIGNUP FUNCTIONALITY ---
+  // --- SIGNUP FUNCTIONALITY (FIXED ERROR HANDLING) ---
   document.getElementById('signup-form').addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -681,6 +685,7 @@ a{color:inherit;text-decoration:none}
           const user = userCredential.user;
           
           // 2. Save additional user data to Firestore in the private user space
+          // Path: /artifacts/{appId}/users/{userId}/user_profile/data
           const userDocRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_profile/data`);
 
           await setDoc(userDocRef, {
@@ -696,10 +701,14 @@ a{color:inherit;text-decoration:none}
       } catch (error) {
           console.error('Signup Error:', error.code, error.message);
           let errorMessage = 'An unknown error occurred.';
+          
           if (error.code === 'auth/email-already-in-use') {
               errorMessage = 'This email is already registered. Try logging in.';
           } else if (error.code === 'auth/weak-password') {
               errorMessage = 'Password should be at least 6 characters.';
+          } else if (error.code === 'auth/admin-restricted-operation') {
+              // --- CRITICAL FIX ADVICE ---
+              errorMessage = 'Sign Up Failed: Firebase is restricted. Go to the **Firebase Console** (Project: konek-ani-repository), navigate to **Authentication** > **Sign-in method**, and **ENABLE Email/Password** sign-in.';
           }
           showCustomMessage(`Sign Up Failed: ${errorMessage}`);
       }
